@@ -1,6 +1,10 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+DOM is a centralised framework and execution environment designed to run your complex database operations 
+in a reliable, restartable and scalable fashion across if necesssary hundreds of database instances.
+
+Each operation is first broken down into a set of restartable tasks that you supply as stored procedues and 
+DOM executes across each database instances you have configured into DOM's data model.
 
 ### What is this repository for? ###
 
