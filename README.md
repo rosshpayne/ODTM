@@ -1,12 +1,12 @@
 # README #
 
-DOM is a framework and centralised execution environment designed to run your complex Oracle database operations 
-in a reliable, restartable and scalable fashion across if necesssary hundreds of database instances.
+DOM is a framework and centralised execution environment designed to run your complex Oracle database operations (e.g. purge data, reorg tables/indexes)
+in a reliable, restartable and scalable fashion across hundreds of database instances at a time.
 
-Each operation is first broken down into a set of restartable tasks that you supply as stored procedues and 
-DOM executes across each database instances you have configured into DOM's data model.
+A database opertion consists of an ordered set of restartable tasks, each implemented by a stored procedues you have written.
+DOM executes each task concurrently across each database instances you have associated with the operation.  
 
-DOM logs all operations by task down to the SQL level.
+DOM logs all operations by task and SQL.
 
 ### What is this repository for? ###
 
