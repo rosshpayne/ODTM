@@ -1,0 +1,1750 @@
+
+--------------------------------------------------------
+--  File created - Tuesday-March-04-2014   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Sequence DBA_MTN_ITERATION_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "DOM_OWN"."DBA_MTN_ITERATION_SEQ"  MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence DBA_MTN_RUNTTIME_TASK_LOG_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "DOM_OWN"."DBA_MTN_RUNTTIME_TASK_LOG_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence DBA_MTN_RUN_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "DOM_OWN"."DBA_MTN_RUN_SEQ"  MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 575 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence DBA_MTN_TASK_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "DOM_OWN"."DBA_MTN_TASK_SEQ"  MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 95180 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence DDL_LOG_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "DOM_OWN"."DDL_LOG_SEQ"  MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 17338 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence DOM$DEBUG_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "DOM_OWN"."DOM$DEBUG_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 88198 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence DOM$PARAMETERS_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "DOM_OWN"."DOM$PARAMETERS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 115 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence DOM$RUN_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "DOM_OWN"."DOM$RUN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 2765 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence DOM$TASK_ID_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "DOM_OWN"."DOM$TASK_ID_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 295 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence DOM$TASK_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "DOM_OWN"."DOM$TASK_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 22512 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence OPS$INSTALLED_OUTLINE_LOG_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "DOM_OWN"."OPS$INSTALLED_OUTLINE_LOG_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence OPS$SNAP_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "DOM_OWN"."OPS$SNAP_SEQ"  MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 1000 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence RUNTIME_TASK_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "DOM_OWN"."RUNTIME_TASK_SEQ"  MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Table DOM$DATABASES
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$DATABASES" 
+   (	"ID" NUMBER, 
+	"NAME_PREFIX" VARCHAR2(30 BYTE), 
+	"ENABLED" CHAR(1 BYTE) DEFAULT 'Y', 
+	"LAST_MODIFIED" DATE, 
+	"CREATED" DATE, 
+	"INSTANCE" VARCHAR2(2 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$DATABASE_ENVIRONMENTS
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$DATABASE_ENVIRONMENTS" 
+   (	"DATABASE_ID" NUMBER, 
+	"ENVIRONMENT_ID" NUMBER, 
+	"ENVIRONMENT_CODE" VARCHAR2(3 BYTE), 
+	"ENVIRONMENT_INSTANCE" VARCHAR2(2 BYTE), 
+	"ENABLED" VARCHAR2(1 BYTE) DEFAULT 'N'
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+ 
+
+   COMMENT ON COLUMN "DOM_OWN"."DOM$DATABASE_ENVIRONMENTS"."ENVIRONMENT_CODE" IS 'code for environment when it doesn''t meet the standard';
+--------------------------------------------------------
+--  DDL for Table DOM$DATABASE_OBJECTS
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$DATABASE_OBJECTS" 
+   (	"DATABASE_ID" NUMBER, 
+	"OBJECT_ID" NUMBER, 
+	"ENABLED" VARCHAR2(1 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$DEBUG_LOG
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$DEBUG_LOG" 
+   (	"ID" NUMBER, 
+	"RUN_ID" NUMBER, 
+	"MESSAGE" VARCHAR2(2000 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$ENVIRONMENTS
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$ENVIRONMENTS" 
+   (	"ID" NUMBER, 
+	"DESCRIPTION" VARCHAR2(2000 BYTE), 
+	"ENABLED" CHAR(1 BYTE) DEFAULT 'Y', 
+	"CODE" VARCHAR2(4 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$OBJECTS
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$OBJECTS" 
+   (	"ID" NUMBER, 
+	"OBJECT_TYPE" VARCHAR2(30 BYTE), 
+	"OBJECT_NAME" VARCHAR2(30 BYTE), 
+	"OBJECT_OWNER" VARCHAR2(30 BYTE), 
+	"ENABLED" CHAR(1 BYTE) DEFAULT 'Y'
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$OPERATIONS
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$OPERATIONS" 
+   (	"ID" NUMBER, 
+	"NAME" VARCHAR2(30 BYTE), 
+	"SHORT_NAME" VARCHAR2(4 BYTE), 
+	"DESCRIPTION" VARCHAR2(2000 BYTE), 
+	"LAST_MODIFIED" DATE, 
+	"ENABLED" CHAR(1 BYTE) DEFAULT 'Y', 
+	"DURATION" INTERVAL DAY (0) TO SECOND (0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$OPERATION_DATABASES
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$OPERATION_DATABASES" 
+   (	"ENABLED" CHAR(1 BYTE) DEFAULT 'Y', 
+	"CREATED" DATE, 
+	"LAST_MODIFIED" DATE, 
+	"DATABASE_ID" NUMBER, 
+	"OPERATION_ID" NUMBER, 
+	"OPERATION_INSTANCE" NUMBER DEFAULT 1
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$OPERATION_ENVIRONMENTS
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$OPERATION_ENVIRONMENTS" 
+   (	"OPERATION_ID" NUMBER, 
+	"ENVIRONMENT_ID" NUMBER, 
+	"ENABLED" VARCHAR2(1 BYTE), 
+	"MAX_ELAPSED_MINUTES" NUMBER, 
+	"DURATION" INTERVAL DAY (0) TO SECOND (0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$OPERATION_INSTANCE
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$OPERATION_INSTANCE" 
+   (	"OPERATION_ID" NUMBER, 
+	"INSTANCE" NUMBER, 
+	"ENABLED" VARCHAR2(1 BYTE), 
+	"LAST_MODIFIED" DATE
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$OPERATION_ITERATOR
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$OPERATION_ITERATOR" 
+   (	"PACKAGE_ID" NUMBER, 
+	"OPERATION_ID" NUMBER
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$OPERATION_OBJECTS
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$OPERATION_OBJECTS" 
+   (	"OPERATION_ID" NUMBER, 
+	"OBJECT_ID" NUMBER, 
+	"ENABLED" CHAR(1 BYTE) DEFAULT 'Y', 
+	"CREATED" DATE, 
+	"RUN_ORDER" NUMBER DEFAULT 1
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$PACKAGES
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$PACKAGES" 
+   (	"ID" NUMBER(*,0), 
+	"PACKAGE_NAME" VARCHAR2(30 BYTE), 
+	"OWNER" VARCHAR2(30 BYTE), 
+	"ENABLED" CHAR(1 BYTE) DEFAULT 'Y', 
+	"DESCRIPTION" VARCHAR2(2000 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$PARAMETERS
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$PARAMETERS" 
+   (	"ID" NUMBER, 
+	"NAME" VARCHAR2(40 BYTE), 
+	"VALUE" VARCHAR2(2000 BYTE), 
+	"DESCRIPTION" VARCHAR2(800 BYTE), 
+	"ENABLED" CHAR(1 BYTE) DEFAULT 'Y', 
+	"CREATED" DATE, 
+	"LAST_MODIFIED" DATE, 
+	"OPERATION_ID" NUMBER, 
+	"OBJECT_ID" NUMBER, 
+	"ENVIRONMENT_ID" NUMBER DEFAULT 5, 
+	"OPERATION_INSTANCE" NUMBER
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$REORG_CONTROL
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$REORG_CONTROL" 
+   (	"STOP_REORG" CHAR(1 BYTE) DEFAULT 'N', 
+	"STOP_AT_PARTITION" VARCHAR2(30 BYTE)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$REORG_PART_LOG
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$REORG_PART_LOG" 
+   (	"RUN_ID" NUMBER, 
+	"OWNER" VARCHAR2(30 BYTE), 
+	"TABLE_NAME" VARCHAR2(30 BYTE), 
+	"PARTITION_NAME" VARCHAR2(30 BYTE), 
+	"PARTITION_POSITION" NUMBER, 
+	"NUM_ROWS" NUMBER, 
+	"BYTES_BEFORE" NUMBER, 
+	"BYTES_AFTER" NUMBER, 
+	"BLEVEL_BEFORE" NUMBER, 
+	"BLEVEL_AFTER" NUMBER, 
+	"STATUS" CHAR(1 BYTE) DEFAULT 'P', 
+	"STATUS_CHANGED" DATE, 
+	"ERRORT_MSG" VARCHAR2(300 BYTE)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$RUNTIME_OP_APP_DB_OBJ_TMP
+--------------------------------------------------------
+
+  CREATE GLOBAL TEMPORARY TABLE "DOM_OWN"."DOM$RUNTIME_OP_APP_DB_OBJ_TMP" 
+   (	"DATABASE_ID" NUMBER, 
+	"DATABASE_NAME" VARCHAR2(36 BYTE), 
+	"OBJECT_ID" NUMBER, 
+	"OPERATION_ID" NUMBER, 
+	"OBJECT_RUN_ORDER" NUMBER, 
+	"RUN_ID" NUMBER, 
+	"OBJECT_OWNER" VARCHAR2(20 BYTE), 
+	"OBJECT_NAME" VARCHAR2(30 BYTE)
+   ) ON COMMIT PRESERVE ROWS ;
+--------------------------------------------------------
+--  DDL for Table DOM$RUN_LOG
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$RUN_LOG" 
+   (	"ID" NUMBER, 
+	"START_DTTM" TIMESTAMP (6), 
+	"END_DTTM" TIMESTAMP (6), 
+	"STATUS" CHAR(1 BYTE) DEFAULT 'R', 
+	"STATUS_MSG" VARCHAR2(400 BYTE), 
+	"OPERATION_ID" NUMBER, 
+	"ENVIRONMENT_ID" NUMBER DEFAULT NULL, 
+	"RUN_MODE" VARCHAR2(1 BYTE), 
+	"OPERATION_INSTANCE" NUMBER DEFAULT 1, 
+	"INSTANCE_STARTUP" DATE, 
+	"USERNAME" VARCHAR2(30 BYTE), 
+	"CLIENT_PROCESS_ID" NUMBER, 
+	"SERIAL" NUMBER, 
+	"SID" NUMBER, 
+	"RESTART_DTTM" TIMESTAMP (6)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+ 
+
+   COMMENT ON COLUMN "DOM_OWN"."DOM$RUN_LOG"."OPERATION_ID" IS 'apply operation to all objects (if object_id is null) in all databases apply opeartion to obj (if obj is not null) in all databases apply operation to obj in db (if obj xxx specified)';
+--------------------------------------------------------
+--  DDL for Table DOM$SQL_LOG
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$SQL_LOG" 
+   (	"ID" NUMBER, 
+	"SQL_STR" VARCHAR2(4000 BYTE), 
+	"END_DTTM" TIMESTAMP (6), 
+	"STATUS" CHAR(1 BYTE) DEFAULT 'R', 
+	"STATUS_MSG" VARCHAR2(1000 BYTE), 
+	"ROW_COUNT" NUMBER, 
+	"START_DTTM" TIMESTAMP (6), 
+	"PREVIEW_MODE" CHAR(1 BYTE) DEFAULT 'N', 
+	"TASK_LOG_ID" NUMBER, 
+	"QUERY_THREADS" NUMBER, 
+	"DDL_THREADS" NUMBER, 
+	"DML_THREADS" NUMBER, 
+	"SERVER_THREADS" NUMBER
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+ 
+
+   COMMENT ON COLUMN "DOM_OWN"."DOM$SQL_LOG"."ROW_COUNT" IS 'number of rows affected by sql statement';
+--------------------------------------------------------
+--  DDL for Table DOM$STATUS
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$STATUS" 
+   (	"ID" CHAR(1 BYTE), 
+	"DESCRIPTION" VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$TASKS
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$TASKS" 
+   (	"ID" NUMBER, 
+	"PROCEDURE_NAME" VARCHAR2(30 BYTE), 
+	"DESCRIPTION" VARCHAR2(200 BYTE), 
+	"ENABLED" CHAR(1 BYTE) DEFAULT 'Y', 
+	"CREATED" DATE, 
+	"LAST_UPDATED" DATE, 
+	"PACKAGE_ID" NUMBER, 
+	"MAX_ITERATIONS" NUMBER
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$TASK_LOG
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$TASK_LOG" 
+   (	"RUN_ID" NUMBER, 
+	"OPERATION_ID" NUMBER, 
+	"DATABASE_ID" NUMBER, 
+	"OBJECT_ID" NUMBER, 
+	"TASK_ID" NUMBER, 
+	"STATUS" CHAR(1 BYTE), 
+	"STATUS_MSG" VARCHAR2(200 BYTE), 
+	"START_DTTM" TIMESTAMP (0) WITH LOCAL TIME ZONE, 
+	"END_DTTM" TIMESTAMP (0) WITH LOCAL TIME ZONE, 
+	"REPEAT_INSTANCE" NUMBER, 
+	"DATABASE_NAME" VARCHAR2(12 BYTE), 
+	"ID" NUMBER
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table DOM$TASK_RUN_ORDER
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."DOM$TASK_RUN_ORDER" 
+   (	"OPERATION_ID" NUMBER, 
+	"TASK_ID" NUMBER, 
+	"RUN_ORDER" NUMBER, 
+	"MAX_ITERATIONS" NUMBER, 
+	"ENABLED" VARCHAR2(1 BYTE) DEFAULT 'Y', 
+	"SYSTEM_GENERATED" VARCHAR2(1 BYTE) DEFAULT 'N'
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+ 
+
+   COMMENT ON COLUMN "DOM_OWN"."DOM$TASK_RUN_ORDER"."RUN_ORDER" IS '0 means its the iterator task';
+--------------------------------------------------------
+--  DDL for Table STATE$KENAN_DROP_IND_TS_PM
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."STATE$KENAN_DROP_IND_TS_PM" 
+   (	"PARTITION_POSITION" NUMBER, 
+	"INDEX_TABLESPACE" VARCHAR2(30 BYTE), 
+	"RUN_ID" NUMBER
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table STATE$KENAN_DROP_PM
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."STATE$KENAN_DROP_PM" 
+   (	"PARTITION_NAME" VARCHAR2(30 BYTE), 
+	"TABLE_TABLESPACE" VARCHAR2(30 BYTE), 
+	"EXCHANGE_TABLE" VARCHAR2(62 BYTE), 
+	"RUN_ID" NUMBER, 
+	"TABLE_OWNER" VARCHAR2(30 BYTE), 
+	"TABLE_NAME" VARCHAR2(30 BYTE), 
+	"EXCHANGED" VARCHAR2(1 BYTE) DEFAULT 'N', 
+	"REINSERTED" VARCHAR2(1 BYTE) DEFAULT 'N', 
+	"TABLE_DROPPED" VARCHAR2(1 BYTE) DEFAULT 'N', 
+	"TABLESPACE_DROPPED" VARCHAR2(1 BYTE) DEFAULT 'N', 
+	"PARTITION_POSITION" NUMBER, 
+	"TABLE_CREATED" VARCHAR2(1 BYTE) DEFAULT 'N', 
+	"PARTITION_DROPPED" VARCHAR2(1 BYTE) DEFAULT 'N', 
+	"EXCHANGE_TABLE_DROPPED" VARCHAR2(1 BYTE) DEFAULT 'N', 
+	"INSERT_PARTITION" VARCHAR2(30 BYTE)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "DOM" ;
+ 
+
+   COMMENT ON COLUMN "DOM_OWN"."STATE$KENAN_DROP_PM"."EXCHANGED" IS 'Has partition been exchanged';
+ 
+   COMMENT ON COLUMN "DOM_OWN"."STATE$KENAN_DROP_PM"."REINSERTED" IS 'Has table been reinserted into partitioned table';
+ 
+   COMMENT ON COLUMN "DOM_OWN"."STATE$KENAN_DROP_PM"."TABLE_DROPPED" IS 'H as';
+ 
+   COMMENT ON COLUMN "DOM_OWN"."STATE$KENAN_DROP_PM"."PARTITION_POSITION" IS 'dirvies order of dropping';
+ 
+   COMMENT ON COLUMN "DOM_OWN"."STATE$KENAN_DROP_PM"."TABLE_CREATED" IS 'exchange table created';
+--------------------------------------------------------
+--  DDL for Table STATE$KENAN_PM
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."STATE$KENAN_PM" 
+   (	"RUN_ID" NUMBER, 
+	"TABLE_OWNER" VARCHAR2(30 BYTE), 
+	"TABLE_NAME" VARCHAR2(30 BYTE), 
+	"LEADING_MONTH" DATE, 
+	"PARTITION_NAME" VARCHAR2(30 BYTE), 
+	"TABLESPACE_NAME" VARCHAR2(30 BYTE)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table STATE$PM
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."STATE$PM" 
+   (	"RUN_ID" NUMBER, 
+	"TABLE_OWNER" VARCHAR2(30 BYTE), 
+	"TABLE_NAME" VARCHAR2(30 BYTE), 
+	"PARTITION_MONTH" DATE, 
+	"PARTITION_NAME" VARCHAR2(30 BYTE)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table STATE$PM_ADD_MONTH
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."STATE$PM_ADD_MONTH" 
+   (	"RUN_ID" NUMBER, 
+	"TABLE_OWNER" VARCHAR2(30 BYTE), 
+	"TABLE_NAME" VARCHAR2(30 BYTE), 
+	"PARTITION_MONTH" DATE, 
+	"PARTITION_NAME" VARCHAR2(30 BYTE), 
+	"OPERATION_TYPE" CHAR(1 BYTE)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table STATE$PM_DROP_MONTH
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."STATE$PM_DROP_MONTH" 
+   (	"RUN_ID" NUMBER, 
+	"TABLE_OWNER" VARCHAR2(30 BYTE), 
+	"TABLE_NAME" VARCHAR2(30 BYTE), 
+	"PARTITION_MONTH" DATE, 
+	"PARTITION_NAME" VARCHAR2(30 BYTE)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table STATE$PM_TRUNCATE_MONTH
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."STATE$PM_TRUNCATE_MONTH" 
+   (	"RUN_ID" NUMBER, 
+	"TABLE_OWNER" VARCHAR2(30 BYTE), 
+	"TABLE_NAME" VARCHAR2(30 BYTE), 
+	"PARTITION_MONTH" DATE, 
+	"PARTITION_NAME" VARCHAR2(30 BYTE)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table STATE$REORG
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."STATE$REORG" 
+   (	"RUN_ID" NUMBER, 
+	"OWNER" VARCHAR2(30 BYTE), 
+	"TABLE_NAME" VARCHAR2(30 BYTE), 
+	"PARTITION_NAME" VARCHAR2(30 BYTE)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Table TT
+--------------------------------------------------------
+
+  CREATE TABLE "DOM_OWN"."TT" 
+   (	"RUN_ID" NUMBER, 
+	"DATABASE_ID" NUMBER, 
+	"DB_NAME" VARCHAR2(36 BYTE), 
+	"OBJECT_ID" NUMBER, 
+	"OBJECT_OWNER" VARCHAR2(30 BYTE), 
+	"OBJECT_NAME" VARCHAR2(30 BYTE), 
+	"OPERATION_ID" NUMBER, 
+	"OBJECT_RUN_ORDER" NUMBER
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for View DOM$DATABASES_V
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "DOM_OWN"."DOM$DATABASES_V" ("DESCRIPTION", "DB_NAME", "DATABASE_ID", "ENVIRONMENT_ID") AS 
+  SELECT e.description,d.name_prefix
+    ||nvl(de.environment_code,e.code)
+    ||NVL(d.instance,de.environment_instance) db_name ,
+    d.id database_id
+  , e.id environment_id
+  FROM DOM$environments                  e
+  JOIN DOM$database_environments de ON (de.environment_id=e.id)
+  JOIN DOM$databases                        d  ON (d.id=de.database_id)
+ WHERE     e.enabled = 'Y'
+      AND     d.enabled = 'Y'
+      AND    de.enabled='Y';
+--------------------------------------------------------
+--  DDL for View DOM$OPERATION_DATABASES_V
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "DOM_OWN"."DOM$OPERATION_DATABASES_V" ("OPERATION_ID", "DB_NAME", "CODE", "DATABASE_ID", "ENVIRONMENT_ID", "OP_INSTANCE") AS 
+  SELECT oe.operation_id, d.name_prefix
+    ||nvl(de.environment_code,e.code)
+    ||NVL(d.instance,de.environment_instance) db_name
+  ,  e.code
+  ,  d.id database_id
+  ,  oe.environment_id
+  ,ro.operation_instance op_instance
+  FROM DOM$operation_environments     oe
+  JOIN DOM$environments                         e  ON (oe.environment_id=e.id)
+  JOIN DOM$database_environments      de ON (de.environment_id=e.id)
+  JOIN DOM$databases                             d  ON (d.id=de.database_id)
+  JOIN DOM$operation_databases          ro ON (ro.database_id =d.id AND ro.operation_id=oe.operation_id)
+  JOIN DOM$operation_instance               oi ON (ro.operation_id=oi.operation_id AND ro.operation_instance=oi.instance)
+  JOIN DOM$operations                          op  ON (oi.operation_id=op.id)
+WHERE    e.enabled='Y'
+ AND       d.enabled='Y'
+  AND    oe.enabled='Y'
+  AND     ro.enabled='Y'
+  AND     oi.enabled='Y'
+  AND     de.enabled='Y'
+  AND     op.enabled='Y'
+ 
+ ;
+--------------------------------------------------------
+--  DDL for View DOM$OPERATION_OBJECTS_V
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "DOM_OWN"."DOM$OPERATION_OBJECTS_V" ("OBJECT_ID", "OBJECT_TYPE", "OBJECT_OWNER", "OBJECT_NAME", "OPERATION_ID", "OP_INSTANCE", "DATABASE_ID", "OBJECT_RUN_ORDER") AS 
+  SELECT  o.id object_id
+  , o.object_type
+  , o.object_owner
+  , o.object_name
+  , op.id operation_id
+  , ro.operation_instance op_instance
+ , ro.database_id
+ ,oo.run_Order object_run_order
+FROM    dom$objects                 o
+   JOIN  dom$operation_objects     oo ON (o.id=oo.object_id)
+   JOIN  dom$operations            op ON (op.id=oo.operation_id)
+   JOIN  dom$operation_databases   ro ON (ro.operation_id=op.id)
+   JOIN  dom$operation_instance    oi ON (ro.operation_instance=oi.instance AND ro.operation_id = oi.operation_id)
+WHERE   oo.enabled = 'Y'
+  AND       ro.enabled = 'Y'
+  AND      oi.enabled   = 'Y'
+  AND      o.enabled = 'Y'
+ 
+ ;
+--------------------------------------------------------
+--  DDL for View DOM$OPERATION_RUN_ORDER_V
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "DOM_OWN"."DOM$OPERATION_RUN_ORDER_V" ("DATABASE_ID", "DB_NAME", "OBJECT_ID", "OBJECT_OWNER", "OBJECT_NAME", "OPERATION_ID", "OBJECT_RUN_ORDER", "ENVIRONMENT_ID", "OP_INSTANCE") AS 
+  SELECT d.database_id, d.db_name, o.object_id, o.object_owner, o.object_name
+          ,o.operation_id ,o.object_run_order, d.environment_id   , o.op_instance
+    FROM  DOM$operation_objects_v    o
+    JOIN  DOM$operation_databases_v  d ON (d.operation_id   = o.operation_id AND o.op_instance = d.op_instance and o.database_id=d.database_id)
+    JOIN  DOM$database_objects      do ON (o.object_id=do.object_id AND d.database_id=do.database_id)
+    WHERE  do.enabled = 'Y'
+ 
+ ;
+--------------------------------------------------------
+--  DDL for View DOM$OPERATION_TASKS_V
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "DOM_OWN"."DOM$OPERATION_TASKS_V" ("OPERATION_ID", "OPERATION_NAME", "TASK_ID", "OWNER", "PACKAGE_NAME", "PROCEDURE_NAME", "TASK_RUN_ORDER") AS 
+  SELECT  o.id operation_id
+  , o.name operation_name
+  , t.id task_id
+  , p.owner
+  , p.package_name
+  , t.procedure_name
+  , tro.run_order task_run_order
+FROM    dom$packages             p
+   JOIN   dom$tasks                    t    ON (p.id = t.package_id)
+   JOIN   dom$task_run_order tro ON (tro.task_id = t.id)
+   JOIN   dom$operations           o     ON (tro.operation_id=o.id)
+WHERE  p.enabled = 'Y'
+   AND    t.enabled = 'Y'
+   AND    o.enabled = 'Y'
+  AND   tro.enabled = 'Y'
+   AND   tro.run_order > 0
+ AND tro.system_generated='N'
+ 
+ ;
+--------------------------------------------------------
+--  DDL for View DOM$RUNNING_TASK_V
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "DOM_OWN"."DOM$RUNNING_TASK_V" ("ID", "RUN_ID", "DATABASE_ID", "TASK_ID", "OBJECT_ID", "REPEAT_INSTANCE", "STATUS") AS 
+  SELECT tl.id  , tl.run_id, tl.database_id, tl.task_id, tl.object_id , tl.repeat_instance, tl.status
+      FROM
+         (SELECT id, run_id, status , database_id, object_id, task_id, repeat_instance,  max(id) over (partition by run_id) max_log_task_id
+           FROM   DOM$task_log
+           WHERE   status = 'R'
+          )     tl
+      WHERE tl.id= tl.max_log_task_id
+ 
+ ;
+--------------------------------------------------------
+--  DDL for View DOM$SQL_LOG_V
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "DOM_OWN"."DOM$SQL_LOG_V" ("RUN_ID", "OPERATION_ID", "RUN_STATUS", "TASK_STATUS", "ID", "SQL_STR", "END_DTTM", "STATUS", "STATUS_MSG", "ROW_COUNT", "START_DTTM", "PREVIEW_MODE", "TASK_LOG_ID", "QUERY_THREADS", "DDL_THREADS", "DML_THREADS", "SERVER_THREADS", "TASK_ID") AS 
+  SELECT rl.id run_id,rl.operation_id,rl.status run_status,tl.status task_status ,sl."ID",sl."SQL_STR",sl."END_DTTM",sl."STATUS",sl."STATUS_MSG",sl."ROW_COUNT",sl."START_DTTM",sl."PREVIEW_MODE",sl."TASK_LOG_ID",sl."QUERY_THREADS",sl."DDL_THREADS",sl."DML_THREADS",sl."SERVER_THREADS",tl.task_id
+FROM DOM$run_log     rl
+ JOIN DOM$task_log   tl   ON (tl.run_id=rl.id)
+ JOIN DOM$sql_log    sl    ON (sl.task_log_id=tl.id)
+ORDER by sl.id
+ 
+ ;
+--------------------------------------------------------
+--  DDL for View DOM$SQL_RUNNING_V
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "DOM_OWN"."DOM$SQL_RUNNING_V" ("RUN_ID", "OPERATION_ID", "ID", "SQL_STR", "END_DTTM", "STATUS", "STATUS_MSG", "ROW_COUNT", "START_DTTM", "PREVIEW_MODE", "TASK_LOG_ID", "QUERY_THREADS", "DDL_THREADS", "DML_THREADS", "SERVER_THREADS") AS 
+  SELECT rl.id run_id,rl.operation_id, sl."ID",sl."SQL_STR",sl."END_DTTM",sl."STATUS",sl."STATUS_MSG",sl."ROW_COUNT",sl."START_DTTM",sl."PREVIEW_MODE",sl."TASK_LOG_ID",sl."QUERY_THREADS",sl."DDL_THREADS",sl."DML_THREADS",sl."SERVER_THREADS"
+FROM DOM$run_log     rl
+ JOIN DOM$task_log   tl   ON (tl.run_id=rl.id)
+ JOIN DOM$sql_log    sl    ON (sl.task_log_id=tl.id)
+WHERE rl.status = 'R'
+ORDER by sl.id
+ 
+ ;
+--------------------------------------------------------
+--  DDL for Index DBA_MTN_DDL_LOG_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DBA_MTN_DDL_LOG_PK" ON "DOM_OWN"."DOM$SQL_LOG" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DBA_MTN_OBJECTS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DBA_MTN_OBJECTS_PK" ON "DOM_OWN"."DOM$OBJECTS" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DBA_MTN_OPERATION_TASKS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DBA_MTN_OPERATION_TASKS_PK" ON "DOM_OWN"."DOM$TASK_RUN_ORDER" ("OPERATION_ID", "TASK_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DBA_MTN_STATUS_TYP_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DBA_MTN_STATUS_TYP_PK" ON "DOM_OWN"."DOM$STATUS" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS NOCOMPRESS LOGGING
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DBA_MTN_TASKS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DBA_MTN_TASKS_PK" ON "DOM_OWN"."DOM$TASKS" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DB_MTN_DATABASE_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DB_MTN_DATABASE_PK" ON "DOM_OWN"."DOM$DATABASES" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$DATABASES_UK1
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$DATABASES_UK1" ON "DOM_OWN"."DOM$DATABASES" ("NAME_PREFIX", "INSTANCE") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$DATABASE_ENVIRONMENTS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$DATABASE_ENVIRONMENTS_PK" ON "DOM_OWN"."DOM$DATABASE_ENVIRONMENTS" ("DATABASE_ID", "ENVIRONMENT_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$DATABASE_OBJECTS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$DATABASE_OBJECTS_PK" ON "DOM_OWN"."DOM$DATABASE_OBJECTS" ("DATABASE_ID", "OBJECT_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$OBJECTS_UK1
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$OBJECTS_UK1" ON "DOM_OWN"."DOM$OBJECTS" ("OBJECT_TYPE", "OBJECT_NAME", "OBJECT_OWNER") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$OBJECT_RUN_ORDER_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$OBJECT_RUN_ORDER_PK" ON "DOM_OWN"."DOM$OPERATION_OBJECTS" ("OPERATION_ID", "OBJECT_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$OPERATIONS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$OPERATIONS_PK" ON "DOM_OWN"."DOM$OPERATIONS" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$OPERATION_INSTANCES_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$OPERATION_INSTANCES_PK" ON "DOM_OWN"."DOM$OPERATION_INSTANCE" ("OPERATION_ID", "INSTANCE") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$OPERATION_OBJECTS_UK1
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$OPERATION_OBJECTS_UK1" ON "DOM_OWN"."DOM$OPERATION_OBJECTS" ("OPERATION_ID", "RUN_ORDER") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$OPERATON_ITERATOR_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$OPERATON_ITERATOR_PK" ON "DOM_OWN"."DOM$OPERATION_ITERATOR" ("OPERATION_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$OP_NAME_UK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$OP_NAME_UK" ON "DOM_OWN"."DOM$OPERATIONS" ("NAME") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$PACKAGES_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$PACKAGES_PK" ON "DOM_OWN"."DOM$PACKAGES" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$PACKAGES_UK1
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$PACKAGES_UK1" ON "DOM_OWN"."DOM$PACKAGES" ("PACKAGE_NAME", "OWNER") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$PARAMETERS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$PARAMETERS_PK" ON "DOM_OWN"."DOM$PARAMETERS" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$PARAMETERS_UK1
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$PARAMETERS_UK1" ON "DOM_OWN"."DOM$PARAMETERS" ("OPERATION_ID", "NAME", "OBJECT_ID", "ENVIRONMENT_ID", "OPERATION_INSTANCE") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$REORG_LOG_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$REORG_LOG_PK" ON "DOM_OWN"."DOM$REORG_PART_LOG" ("RUN_ID", "OWNER", "TABLE_NAME", "PARTITION_NAME") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS NOCOMPRESS LOGGING
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$RT_OP_ENV_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$RT_OP_ENV_PK" ON "DOM_OWN"."DOM$OPERATION_ENVIRONMENTS" ("OPERATION_ID", "ENVIRONMENT_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$RUNTIME_OPERATIONS_UK1
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$RUNTIME_OPERATIONS_UK1" ON "DOM_OWN"."DOM$OPERATION_DATABASES" ("DATABASE_ID", "OPERATION_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$RUNTIME_OPERATIONS_UK2
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$RUNTIME_OPERATIONS_UK2" ON "DOM_OWN"."DOM$OPERATION_DATABASES" ("OPERATION_ID", "DATABASE_ID", "OPERATION_INSTANCE") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$RUN_LOG_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$RUN_LOG_PK" ON "DOM_OWN"."DOM$RUN_LOG" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$TASKS_UK1
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$TASKS_UK1" ON "DOM_OWN"."DOM$TASKS" ("PROCEDURE_NAME", "PACKAGE_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$TASK_LOG_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "DOM_OWN"."DOM$TASK_LOG_INDEX1" ON "DOM_OWN"."DOM$TASK_LOG" ("RUN_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$TASK_LOG_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$TASK_LOG_PK" ON "DOM_OWN"."DOM$TASK_LOG" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$TASK_LOG_UK1
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$TASK_LOG_UK1" ON "DOM_OWN"."DOM$TASK_LOG" ("RUN_ID", "OPERATION_ID", "DATABASE_ID", "OBJECT_ID", "TASK_ID", "REPEAT_INSTANCE") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index DOM$TASK_RUN_ORDER_UK1
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."DOM$TASK_RUN_ORDER_UK1" ON "DOM_OWN"."DOM$TASK_RUN_ORDER" ("OPERATION_ID", "RUN_ORDER") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index ENVIRONMENT_TYPE_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."ENVIRONMENT_TYPE_PK" ON "DOM_OWN"."DOM$ENVIRONMENTS" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  DDL for Index STATE$PM_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOM_OWN"."STATE$PM_PK" ON "DOM_OWN"."STATE$PM" ("RUN_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS NOCOMPRESS LOGGING
+  TABLESPACE "DOM" ;
+--------------------------------------------------------
+--  Constraints for Table DOM$DATABASES
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$DATABASES" ADD CONSTRAINT "DBA_MTN_DATABASES_CHK1" CHECK (
+enabled in ('Y','N')
+) ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$DATABASES" ADD CONSTRAINT "DOM$DATABASES_UK1" UNIQUE ("NAME_PREFIX", "INSTANCE")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$DATABASES" ADD CONSTRAINT "DOM$DATABASE_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$DATABASES" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$DATABASES" MODIFY ("NAME_PREFIX" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$DATABASES" MODIFY ("ENABLED" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$DATABASE_ENVIRONMENTS
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$DATABASE_ENVIRONMENTS" ADD CONSTRAINT "DOM$DATABASE_ENVIRONMENTS_PK" PRIMARY KEY ("DATABASE_ID", "ENVIRONMENT_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$DATABASE_ENVIRONMENTS" MODIFY ("DATABASE_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$DATABASE_ENVIRONMENTS" MODIFY ("ENVIRONMENT_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$DATABASE_ENVIRONMENTS" MODIFY ("ENABLED" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$DATABASE_OBJECTS
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$DATABASE_OBJECTS" ADD CONSTRAINT "DOM$DATABASE_OBJECTS_PK" PRIMARY KEY ("DATABASE_ID", "OBJECT_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$DATABASE_OBJECTS" MODIFY ("DATABASE_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$DATABASE_OBJECTS" MODIFY ("OBJECT_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$DATABASE_OBJECTS" MODIFY ("ENABLED" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$DEBUG_LOG
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$DEBUG_LOG" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$DEBUG_LOG" MODIFY ("RUN_ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$ENVIRONMENTS
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$ENVIRONMENTS" ADD CONSTRAINT "DOM$ENVIROMENT_ENABLED_CK" CHECK (
+ENABLED IN ('Y','N')
+) ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$ENVIRONMENTS" ADD CONSTRAINT "DOM$ENVIRONMENTS_CHK1" CHECK (ENABLED IN ('Y', 'N')) ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$ENVIRONMENTS" ADD CONSTRAINT "DOM$ENVIRONMENT_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$ENVIRONMENTS" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$ENVIRONMENTS" MODIFY ("ENABLED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$ENVIRONMENTS" MODIFY ("CODE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$OBJECTS
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$OBJECTS" ADD CONSTRAINT "DOM$OBJECTS_ENABLED_CK" CHECK (
+enabled in ('Y','N')
+) ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OBJECTS" ADD CONSTRAINT "DOM$OBJECTS_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OBJECTS" ADD CONSTRAINT "DOM$OBJECTS_UK1" UNIQUE ("OBJECT_TYPE", "OBJECT_NAME", "OBJECT_OWNER")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OBJECTS" MODIFY ("OBJECT_TYPE" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OBJECTS" MODIFY ("OBJECT_NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OBJECTS" MODIFY ("OBJECT_OWNER" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OBJECTS" MODIFY ("ENABLED" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$OPERATIONS
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$OPERATIONS" ADD CONSTRAINT "DOM$OPERATIONS_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATIONS" ADD CONSTRAINT "DOM$OP_NAME_UK" UNIQUE ("NAME")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATIONS" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATIONS" MODIFY ("NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATIONS" MODIFY ("ENABLED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATIONS" MODIFY ("DURATION" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$OPERATION_DATABASES
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_DATABASES" ADD CONSTRAINT "DBA_MTN_OPERATIONS_CHK1" CHECK (
+enabled in ('Y','N')
+) ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_DATABASES" ADD CONSTRAINT "DOM$RUNTIME_OPERATIONS_UK1" UNIQUE ("DATABASE_ID", "OPERATION_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_DATABASES" ADD CONSTRAINT "DOM$RUNTIME_OPERATIONS_UK2" UNIQUE ("OPERATION_ID", "DATABASE_ID", "OPERATION_INSTANCE")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_DATABASES" MODIFY ("ENABLED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_DATABASES" MODIFY ("CREATED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_DATABASES" MODIFY ("DATABASE_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_DATABASES" MODIFY ("OPERATION_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_DATABASES" MODIFY ("OPERATION_INSTANCE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$OPERATION_ENVIRONMENTS
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_ENVIRONMENTS" ADD CONSTRAINT "DOM$RT_OP_ENV_PK" PRIMARY KEY ("OPERATION_ID", "ENVIRONMENT_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_ENVIRONMENTS" MODIFY ("OPERATION_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_ENVIRONMENTS" MODIFY ("ENVIRONMENT_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_ENVIRONMENTS" MODIFY ("ENABLED" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$OPERATION_INSTANCE
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_INSTANCE" ADD CONSTRAINT "DOM$OPERATION_INSTANCES_PK" PRIMARY KEY ("OPERATION_ID", "INSTANCE")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_INSTANCE" MODIFY ("OPERATION_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_INSTANCE" MODIFY ("INSTANCE" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_INSTANCE" MODIFY ("ENABLED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_INSTANCE" MODIFY ("LAST_MODIFIED" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$OPERATION_ITERATOR
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_ITERATOR" ADD CONSTRAINT "DOM$OPERATON_ITERATOR_PK" PRIMARY KEY ("OPERATION_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_ITERATOR" MODIFY ("PACKAGE_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_ITERATOR" MODIFY ("OPERATION_ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$OPERATION_OBJECTS
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_OBJECTS" ADD CONSTRAINT "DOM$OBJECT_RUN_ORDER_PK" PRIMARY KEY ("OPERATION_ID", "OBJECT_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_OBJECTS" ADD CONSTRAINT "DOM$OBJ_RUN_ORDER_CHK1" CHECK ( enabled in ('Y','N')) ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_OBJECTS" ADD CONSTRAINT "DOM$OBJ_RUN_ORDER_CK2" CHECK ( run_Order > 0) ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_OBJECTS" ADD CONSTRAINT "DOM$OPERATION_OBJECTS_UK1" UNIQUE ("OPERATION_ID", "RUN_ORDER")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_OBJECTS" MODIFY ("OPERATION_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_OBJECTS" MODIFY ("OBJECT_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_OBJECTS" MODIFY ("ENABLED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_OBJECTS" MODIFY ("CREATED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_OBJECTS" MODIFY ("RUN_ORDER" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$PACKAGES
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$PACKAGES" ADD CONSTRAINT "DOM$PACKAGES_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$PACKAGES" ADD CONSTRAINT "DOM$PACKAGES_UK1" UNIQUE ("PACKAGE_NAME", "OWNER")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$PACKAGES" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$PACKAGES" MODIFY ("PACKAGE_NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$PACKAGES" MODIFY ("OWNER" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$PACKAGES" MODIFY ("ENABLED" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$PARAMETERS
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$PARAMETERS" ADD CONSTRAINT "DOM$PARAMETERS_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$PARAMETERS" ADD CONSTRAINT "DOM$PARAMETERS_UK1" UNIQUE ("OPERATION_ID", "NAME", "OBJECT_ID", "ENVIRONMENT_ID", "OPERATION_INSTANCE")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$PARAMETERS" MODIFY ("NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$PARAMETERS" MODIFY ("VALUE" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$PARAMETERS" MODIFY ("ENABLED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$PARAMETERS" MODIFY ("CREATED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$PARAMETERS" MODIFY ("OPERATION_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$PARAMETERS" MODIFY ("ENVIRONMENT_ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$REORG_CONTROL
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$REORG_CONTROL" ADD CHECK (STOP_REORG in ('Y','N')) ENABLE;
+--------------------------------------------------------
+--  Constraints for Table DOM$REORG_PART_LOG
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$REORG_PART_LOG" ADD CONSTRAINT "DOM$REORG_LOG_PK" PRIMARY KEY ("RUN_ID", "OWNER", "TABLE_NAME", "PARTITION_NAME")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS NOCOMPRESS LOGGING
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$REORG_PART_LOG" ADD CONSTRAINT "STATUS_CHK" CHECK (status in ('P','C','E')) ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$REORG_PART_LOG" MODIFY ("RUN_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$REORG_PART_LOG" MODIFY ("OWNER" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$REORG_PART_LOG" MODIFY ("TABLE_NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$REORG_PART_LOG" MODIFY ("PARTITION_POSITION" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$REORG_PART_LOG" MODIFY ("NUM_ROWS" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$REORG_PART_LOG" MODIFY ("BYTES_BEFORE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$RUNTIME_OP_APP_DB_OBJ_TMP
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$RUNTIME_OP_APP_DB_OBJ_TMP" MODIFY ("DATABASE_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$RUNTIME_OP_APP_DB_OBJ_TMP" MODIFY ("DATABASE_NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$RUNTIME_OP_APP_DB_OBJ_TMP" MODIFY ("OBJECT_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$RUNTIME_OP_APP_DB_OBJ_TMP" MODIFY ("OPERATION_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$RUNTIME_OP_APP_DB_OBJ_TMP" MODIFY ("OBJECT_RUN_ORDER" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$RUNTIME_OP_APP_DB_OBJ_TMP" MODIFY ("RUN_ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$RUN_LOG
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$RUN_LOG" ADD CONSTRAINT "DOM$RUN_LOG_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$RUN_LOG" ADD CONSTRAINT "DOM$RUN_LOG_STATUS_CK" CHECK (status IN ('R','E','C','S')) ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$RUN_LOG" MODIFY ("START_DTTM" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$RUN_LOG" MODIFY ("STATUS" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$RUN_LOG" MODIFY ("OPERATION_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$RUN_LOG" MODIFY ("ENVIRONMENT_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$RUN_LOG" MODIFY ("RUN_MODE" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$RUN_LOG" MODIFY ("OPERATION_INSTANCE" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$RUN_LOG" MODIFY ("SID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$SQL_LOG
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$SQL_LOG" ADD CONSTRAINT "DBA_MTN_DDL_LOG_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$SQL_LOG" ADD CONSTRAINT "STATUS_SQL_CHK" CHECK (status IN ('R','E','C','S')) ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$SQL_LOG" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$SQL_LOG" MODIFY ("SQL_STR" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$SQL_LOG" MODIFY ("STATUS" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$SQL_LOG" MODIFY ("START_DTTM" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$SQL_LOG" MODIFY ("PREVIEW_MODE" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$SQL_LOG" MODIFY ("TASK_LOG_ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$STATUS
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$STATUS" ADD CONSTRAINT "DOM$STATUS_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS NOCOMPRESS LOGGING
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$STATUS" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$STATUS" MODIFY ("DESCRIPTION" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$TASKS
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$TASKS" ADD CONSTRAINT "DOM$TASKS_CHK1" CHECK (
+enabled in ('Y','N')
+) ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASKS" ADD CONSTRAINT "DOM$TASKS_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASKS" ADD CONSTRAINT "DOM$TASKS_UK1" UNIQUE ("PROCEDURE_NAME", "PACKAGE_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASKS" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASKS" MODIFY ("PROCEDURE_NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASKS" MODIFY ("ENABLED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASKS" MODIFY ("CREATED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASKS" MODIFY ("PACKAGE_ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$TASK_LOG
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$TASK_LOG" ADD CONSTRAINT "DOM$TASK_LOG_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_LOG" ADD CONSTRAINT "DOM$TASK_LOG_UK1" UNIQUE ("RUN_ID", "OPERATION_ID", "DATABASE_ID", "OBJECT_ID", "TASK_ID", "REPEAT_INSTANCE")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_LOG" ADD CONSTRAINT "STATUS_TASK_CHK" CHECK (STATUS IN ('R', 'E', 'C', 'S', 'F')) ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_LOG" MODIFY ("RUN_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_LOG" MODIFY ("OPERATION_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_LOG" MODIFY ("DATABASE_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_LOG" MODIFY ("OBJECT_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_LOG" MODIFY ("TASK_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_LOG" MODIFY ("REPEAT_INSTANCE" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_LOG" MODIFY ("DATABASE_NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_LOG" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DOM$TASK_RUN_ORDER
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$TASK_RUN_ORDER" ADD CONSTRAINT "DBA_MTN_OP_TASK_CK2" CHECK (run_order >= 0) ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_RUN_ORDER" ADD CONSTRAINT "DOM$TASK_RUN_ORDER_PK" PRIMARY KEY ("OPERATION_ID", "TASK_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_RUN_ORDER" ADD CONSTRAINT "DOM$TASK_RUN_ORDER_UK1" UNIQUE ("OPERATION_ID", "RUN_ORDER")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_RUN_ORDER" MODIFY ("OPERATION_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_RUN_ORDER" MODIFY ("TASK_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_RUN_ORDER" MODIFY ("RUN_ORDER" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_RUN_ORDER" MODIFY ("ENABLED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_RUN_ORDER" MODIFY ("SYSTEM_GENERATED" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table STATE$KENAN_DROP_IND_TS_PM
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_DROP_IND_TS_PM" MODIFY ("PARTITION_POSITION" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_DROP_IND_TS_PM" MODIFY ("INDEX_TABLESPACE" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_DROP_IND_TS_PM" MODIFY ("RUN_ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table STATE$KENAN_DROP_PM
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_DROP_PM" MODIFY ("PARTITION_NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_DROP_PM" MODIFY ("TABLE_TABLESPACE" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_DROP_PM" MODIFY ("RUN_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_DROP_PM" MODIFY ("TABLE_OWNER" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_DROP_PM" MODIFY ("TABLE_NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_DROP_PM" MODIFY ("EXCHANGED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_DROP_PM" MODIFY ("REINSERTED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_DROP_PM" MODIFY ("TABLE_DROPPED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_DROP_PM" MODIFY ("TABLESPACE_DROPPED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_DROP_PM" MODIFY ("PARTITION_POSITION" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_DROP_PM" MODIFY ("TABLE_CREATED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_DROP_PM" MODIFY ("PARTITION_DROPPED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_DROP_PM" MODIFY ("EXCHANGE_TABLE_DROPPED" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_DROP_PM" MODIFY ("INSERT_PARTITION" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table STATE$KENAN_PM
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_PM" MODIFY ("RUN_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_PM" MODIFY ("TABLE_OWNER" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$KENAN_PM" MODIFY ("TABLE_NAME" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table STATE$PM
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."STATE$PM" ADD CONSTRAINT "STATE$PM_PK" PRIMARY KEY ("RUN_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS NOCOMPRESS LOGGING
+  TABLESPACE "DOM"  ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."STATE$PM" MODIFY ("RUN_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$PM" MODIFY ("TABLE_OWNER" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$PM" MODIFY ("TABLE_NAME" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table STATE$PM_ADD_MONTH
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."STATE$PM_ADD_MONTH" MODIFY ("RUN_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$PM_ADD_MONTH" MODIFY ("TABLE_OWNER" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$PM_ADD_MONTH" MODIFY ("TABLE_NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$PM_ADD_MONTH" MODIFY ("OPERATION_TYPE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table STATE$PM_DROP_MONTH
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."STATE$PM_DROP_MONTH" MODIFY ("RUN_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$PM_DROP_MONTH" MODIFY ("TABLE_OWNER" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$PM_DROP_MONTH" MODIFY ("TABLE_NAME" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table STATE$PM_TRUNCATE_MONTH
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."STATE$PM_TRUNCATE_MONTH" MODIFY ("RUN_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$PM_TRUNCATE_MONTH" MODIFY ("TABLE_OWNER" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$PM_TRUNCATE_MONTH" MODIFY ("TABLE_NAME" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table STATE$REORG
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."STATE$REORG" MODIFY ("RUN_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$REORG" MODIFY ("OWNER" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$REORG" MODIFY ("TABLE_NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."STATE$REORG" MODIFY ("PARTITION_NAME" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table TT
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."TT" MODIFY ("DATABASE_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."TT" MODIFY ("OBJECT_OWNER" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."TT" MODIFY ("OBJECT_NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."TT" MODIFY ("OPERATION_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "DOM_OWN"."TT" MODIFY ("OBJECT_RUN_ORDER" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Ref Constraints for Table DOM$DATABASE_ENVIRONMENTS
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$DATABASE_ENVIRONMENTS" ADD CONSTRAINT "DOM$DATABASE_ENVIRONMENTS_FK1" FOREIGN KEY ("DATABASE_ID")
+	  REFERENCES "DOM_OWN"."DOM$DATABASES" ("ID") ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$DATABASE_ENVIRONMENTS" ADD CONSTRAINT "DOM$DATABASE_ENVIRONMENTS_FK2" FOREIGN KEY ("ENVIRONMENT_ID")
+	  REFERENCES "DOM_OWN"."DOM$ENVIRONMENTS" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table DOM$DATABASE_OBJECTS
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$DATABASE_OBJECTS" ADD CONSTRAINT "DOM$DATABASE_OBJECTS_DOM$_FK1" FOREIGN KEY ("DATABASE_ID")
+	  REFERENCES "DOM_OWN"."DOM$DATABASES" ("ID") ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$DATABASE_OBJECTS" ADD CONSTRAINT "DOM$DATABASE_OBJECTS_DOM$_FK2" FOREIGN KEY ("OBJECT_ID")
+	  REFERENCES "DOM_OWN"."DOM$OBJECTS" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table DOM$OPERATION_DATABASES
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_DATABASES" ADD CONSTRAINT "DOM$RUNTIME_OPERATIONS_DO_FK1" FOREIGN KEY ("DATABASE_ID")
+	  REFERENCES "DOM_OWN"."DOM$DATABASES" ("ID") ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_DATABASES" ADD CONSTRAINT "DOM$RUNTIME_OPERATIONS_DO_FK2" FOREIGN KEY ("OPERATION_ID", "OPERATION_INSTANCE")
+	  REFERENCES "DOM_OWN"."DOM$OPERATION_INSTANCE" ("OPERATION_ID", "INSTANCE") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table DOM$OPERATION_ENVIRONMENTS
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_ENVIRONMENTS" ADD CONSTRAINT "DOM$RT_OPERATION_ENVIRONM_FK1" FOREIGN KEY ("OPERATION_ID")
+	  REFERENCES "DOM_OWN"."DOM$OPERATIONS" ("ID") ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_ENVIRONMENTS" ADD CONSTRAINT "DOM$RT_OP_ENV_FK1" FOREIGN KEY ("ENVIRONMENT_ID")
+	  REFERENCES "DOM_OWN"."DOM$ENVIRONMENTS" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table DOM$OPERATION_INSTANCE
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_INSTANCE" ADD CONSTRAINT "DOM$OPERATION_INSTANCES_D_FK1" FOREIGN KEY ("OPERATION_ID")
+	  REFERENCES "DOM_OWN"."DOM$OPERATIONS" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table DOM$OPERATION_ITERATOR
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_ITERATOR" ADD CONSTRAINT "DOM$OPERATON_ITERATOR_DOM_FK1" FOREIGN KEY ("PACKAGE_ID")
+	  REFERENCES "DOM_OWN"."DOM$OPERATIONS" ("ID") ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_ITERATOR" ADD CONSTRAINT "DOM$OPERATON_ITERATOR_DOM_FK2" FOREIGN KEY ("PACKAGE_ID")
+	  REFERENCES "DOM_OWN"."DOM$PACKAGES" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table DOM$OPERATION_OBJECTS
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_OBJECTS" ADD CONSTRAINT "DOM$OBJECT_RUN_ORDER_DOM$_FK1" FOREIGN KEY ("OPERATION_ID")
+	  REFERENCES "DOM_OWN"."DOM$OPERATIONS" ("ID") ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$OPERATION_OBJECTS" ADD CONSTRAINT "DOM$OBJ_RUN_ORDER_FK1" FOREIGN KEY ("OBJECT_ID")
+	  REFERENCES "DOM_OWN"."DOM$OBJECTS" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table DOM$PARAMETERS
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$PARAMETERS" ADD CONSTRAINT "DOM$PARAMETERS_DOM$OPERAT_FK1" FOREIGN KEY ("OPERATION_ID", "ENVIRONMENT_ID")
+	  REFERENCES "DOM_OWN"."DOM$OPERATION_ENVIRONMENTS" ("OPERATION_ID", "ENVIRONMENT_ID") ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$PARAMETERS" ADD CONSTRAINT "DOM$PARAMETERS_DOM$OPERAT_FK2" FOREIGN KEY ("OPERATION_ID", "OPERATION_INSTANCE")
+	  REFERENCES "DOM_OWN"."DOM$OPERATION_INSTANCE" ("OPERATION_ID", "INSTANCE") ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$PARAMETERS" ADD CONSTRAINT "DOM$PARAMETER_FK1" FOREIGN KEY ("OBJECT_ID")
+	  REFERENCES "DOM_OWN"."DOM$OBJECTS" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table DOM$RUN_LOG
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$RUN_LOG" ADD CONSTRAINT "DOM$RUN_LOG_DOM$OPERATION_FK1" FOREIGN KEY ("OPERATION_ID", "OPERATION_INSTANCE")
+	  REFERENCES "DOM_OWN"."DOM$OPERATION_INSTANCE" ("OPERATION_ID", "INSTANCE") ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$RUN_LOG" ADD CONSTRAINT "DOM$RUN_LOG_DOM$OPERATION_FK2" FOREIGN KEY ("OPERATION_ID", "ENVIRONMENT_ID")
+	  REFERENCES "DOM_OWN"."DOM$OPERATION_ENVIRONMENTS" ("OPERATION_ID", "ENVIRONMENT_ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table DOM$SQL_LOG
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$SQL_LOG" ADD CONSTRAINT "DOM$SQL_LOG_DOM$TASK_LOG_FK1" FOREIGN KEY ("TASK_LOG_ID")
+	  REFERENCES "DOM_OWN"."DOM$TASK_LOG" ("ID") DISABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table DOM$TASKS
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$TASKS" ADD CONSTRAINT "DOM$TASKS_FK1" FOREIGN KEY ("PACKAGE_ID")
+	  REFERENCES "DOM_OWN"."DOM$PACKAGES" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table DOM$TASK_LOG
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$TASK_LOG" ADD CONSTRAINT "DOM$TASK_LOG_DOM$OBJECT_R_FK1" FOREIGN KEY ("OPERATION_ID", "OBJECT_ID")
+	  REFERENCES "DOM_OWN"."DOM$OPERATION_OBJECTS" ("OPERATION_ID", "OBJECT_ID") ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_LOG" ADD CONSTRAINT "DOM$TASK_LOG_FK1" FOREIGN KEY ("RUN_ID")
+	  REFERENCES "DOM_OWN"."DOM$RUN_LOG" ("ID") ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_LOG" ADD CONSTRAINT "DOM$TASK_LOG_FK3" FOREIGN KEY ("OPERATION_ID", "TASK_ID")
+	  REFERENCES "DOM_OWN"."DOM$TASK_RUN_ORDER" ("OPERATION_ID", "TASK_ID") ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_LOG" ADD CONSTRAINT "TASK_LOG_FK4" FOREIGN KEY ("DATABASE_ID")
+	  REFERENCES "DOM_OWN"."DOM$DATABASES" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table DOM$TASK_RUN_ORDER
+--------------------------------------------------------
+
+  ALTER TABLE "DOM_OWN"."DOM$TASK_RUN_ORDER" ADD CONSTRAINT "DOM$TASK_RUN_ORDER_FK1" FOREIGN KEY ("OPERATION_ID")
+	  REFERENCES "DOM_OWN"."DOM$OPERATIONS" ("ID") ENABLE;
+ 
+  ALTER TABLE "DOM_OWN"."DOM$TASK_RUN_ORDER" ADD CONSTRAINT "DOM$TASK_RUN_ORDER_FK2" FOREIGN KEY ("TASK_ID")
+	  REFERENCES "DOM_OWN"."DOM$TASKS" ("ID") ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger VALIDATE_OBJECTS_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "DOM_OWN"."VALIDATE_OBJECTS_TRG" before insert or update of object_owner, object_name,object_type on DOM$OBJECTS
+for each row
+DECLARE
+dummy_   number;
+BEGIN
+  SELECT 1 INTO dummy_
+  FROM all_objects
+  WHERE  owner = :new.object_owner
+   AND   object_name = :new.object_name
+   AND   object_type = :new.object_type;
+
+  EXCEPTION
+   WHEN no_data_found THEN
+     RAISE;
+END;
+
+
+/
+ALTER TRIGGER "DOM_OWN"."VALIDATE_OBJECTS_TRG" DISABLE;
+
