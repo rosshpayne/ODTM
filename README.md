@@ -12,7 +12,7 @@ The repository defines the data required by DOM to drive the execution of each d
 
     + database environments types (dev,test,prod etc)
     + the Oracle instances that belong to those environments
-    + the package and SP that defines the database operation
+    + the package and SPs that defines the database operation
     + which operations run across which Oracle instances
     + user defined parameters (key-value pairs) to drive your code logic 
     + detailed runtime logging of all operations, tasks and SQL
