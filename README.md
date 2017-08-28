@@ -1,8 +1,8 @@
 # README #
 
-DOM provides a simple framework and an execution engine, known as the DOM-server, which centrally manages the execution of your complex database maintenance operations remotely across a network of Oracle database instances in a safe, restartable and scalable fashion.
+DOM provides a simple framework and execution engine for the purpose of running your complex database maintenance operations across a network of Oracle database instances from a central server, call the DOM-server, in a safe, restartable and scalable fashion.
 
-Each database operation is represented as an ordered set of stored procedures calls defined in a single PL/SQL package that you develop utilising DOM’s simple framework to guarantee safe restarting of a failed operation while providing logging of all operations to the single DOM server.
+Each database operation is represented as an ordered set of stored procedures calls defined in a single PL/SQL package that you develop utilising DOM’s simple framework to guarantee safe restarting of a failed operation while providing logging of all operations to the DOM server.
 
 DOM features include:
 
