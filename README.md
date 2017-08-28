@@ -2,7 +2,7 @@
 
 DOM provides a simple framework and execution engine for the purpose of running your complex database maintenance operations across a network of Oracle database instances from a central server, call the DOM-server, in a safe, restartable and scalable fashion.
 
-Complex database operations are usually made up of mulitple steps where each one may take many minutes to run and needs to complete successfuly before proceeding to the next step. Alternatively an operation may be involve running identical steps over many Oracle instances.  Eitherway, the more complex the operation the easy it is to justify using DOM.
+Complex database operations are usually made up of mulitple steps where each step may take many minutes to run and needs to complete successfuly before proceeding to the next step. Alternatively an operation may involve running identical steps over many Oracle instances concurrently.  Eitherway, the more complex an operation the easier it is to justify using DOM.
 
 Each database operation is represented as an ordered set of stored procedures calls defined in a single PL/SQL package that you develop utilising DOM’s simple framework to guarantee safe restarting of a failed operation while providing logging of all operations to the DOM server.
 
