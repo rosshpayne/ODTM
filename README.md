@@ -1,20 +1,46 @@
 # README #
 
-DOM is a framework as well as a centralised execution environment designed to run your complex Oracle database operations (e.g. data purging, reorg tables/indexes, partition maintenance)
-across a network of hundreds of Oracle instances in a safe and completely restartable and scalable fashion.
+DOM provides a simple framework and an execution engine, known as the DOM-server, which centrally manages the execution of your database operations remotely across a network of Oracle database instances in a safe, restartable and scalable fashion.
 
-An Operation is a short or long running database administration task that you want to make safely restartabe should an error occur at any stage in the process.
+Each database operation is represented as an ordered set of stored procedures calls defined in a single PL/SQL package that you develop utilising DOM’s simple framework to guarantee safe restarting of a failed operation while providing logging of all operations to the single DOM server.
 
-Typically the more complex opertions executes tens of SQL statements that must all be successfully executed in the order specified.
-Should anyone SQL statement fail you want the operation to immediately abort with detailed logging of all steps completed and a log of the error produced.  Once you have resolved the reason 
-for the failure you then want to be able to restart the operation by simply executing the same command you used to start the operation and have DOM complete the operation from where it last failed.
+DOM features include:
 
-DOM provides you this facility with among other things complete logging down to the SQL level.
+* a central Data Repository
 
-All you need to do is develop a set of stored procedures following DOM's simple framework, with each SP representing one of the restartable steps in the opeation. Each SP typically generates one SQL statement but more generate more. Each SQL is typically executed executed via a DOM API.
+The repository defines the data required by DOM to drive the execution of each database operation across your enterprise. Such information includes but is not limited to:
 
-DOM executes each task concurrently across as many database instances you have associated with the operation.  
+  - database environments types (dev,test,prod etc)
+  - the Oracle instances that belong to those environments
+  - the package and SP that defines the database operation
+  - which operations run across which Oracle instances
+  - user defined parameters (key-value pairs) to drive your code logic 
+  - detailed runtime logging of all operations, tasks and SQL
 
+ secure implementation
+
+The DOM repository and runtime operations are conducted in their own dedicated database schemas with minimum privileges. The DOM server schema has privileges to maintain the repository while each remote instance has a DOM schema with sufficient privileges (usually at a DBA level) to perform the database operations required.
+
+* a central code repository for your database packages.
+
+Each SP package is initially saved to the DOM repository.  At runtime DOM will copy the package to each remote database instance involved in the operation. Note: the repository holds only the package code not any of its dependent objects.
+
+* central runtime logging of your operation down to the SQL level
+
+DOM logs all runtime metrics for each operation across each remote instance and for each of the tasks associated with an operation down to the SQL level.  Such metrics include the execution time for the operation, its tasks and associated SQL, status of each, the SQL text and number of parallel threads used and number of rows processed where appropriate.
+
+* Concurrent processing
+
+For each operation DOM issues a separate Oracle scheduler job on the DOM server for each of the database instances assigned to the operation.  Each job in turn executes the DOM code responsible for remotely executing the uncompleted SP on its assigned Oracle instance
+
+
+Simple Framework 
+
+DOM provides a framework which your packages should use to get all the benefits of flexibility of operation, re-startability and logging.  
+
+Simple and safe restartability
+
+Should an operation fail DOM will log the error in the central repository. Once you have fixed the reason for the error the DOM administrator merely has to issue the same command used to start the operation.  DOM will restart the operation from the failed task. 
 
 ### What is this repository for? ###
 
