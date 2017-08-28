@@ -10,12 +10,12 @@ DOM features include:
 
 The repository defines the data required by DOM to drive the execution of each database operation across your enterprise. Such information includes but is not limited to:
 
-  ** database environments types (dev,test,prod etc)
-  ** the Oracle instances that belong to those environments
-  ** the package and SP that defines the database operation
-  ** which operations run across which Oracle instances
-  ** user defined parameters (key-value pairs) to drive your code logic 
-  ** detailed runtime logging of all operations, tasks and SQL
+  + database environments types (dev,test,prod etc)
+  + the Oracle instances that belong to those environments
+  + the package and SP that defines the database operation
+  + which operations run across which Oracle instances
+  + user defined parameters (key-value pairs) to drive your code logic 
+  + detailed runtime logging of all operations, tasks and SQL
 
 * secure implementation
 
