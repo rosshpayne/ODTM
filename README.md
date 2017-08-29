@@ -1,10 +1,10 @@
 # README #
 
-DOM provides a simple framework and execution engine for the purpose of running your complex database maintenance operations across a network of Oracle database instances from a central server, call the DOM-server, in a safe, restartable and scalable fashion.
+DOM provides a simple framework and execution engine for the purpose of running your complex database maintenance operations across a network of Oracle database instances from a central server, called the DOM-server, in a safe, restartable and scalable fashion.
 
-Complex database operations are usually made up of mulitple steps where each step may take many minutes to run and needs to complete successfuly before proceeding to the next step. Alternatively an operation may involve running identical steps over many Oracle instances concurrently.  Eitherway, the more complex an operation the easier it is to justify using DOM.
+Complex database operations are usually composed of mulitple steps across multiple database objects where each step must complete successfuly before proceeding to the next step. Alternatively an operation may involve running identical steps over multiple Oracle instances concurrently.  Eitherway, the more complex an operation the easier it becomes to justify the cost of configuring DOM to do it.
 
-Each database operation is represented as an ordered set of stored procedures calls defined in a single PL/SQL package that you develop utilising DOM’s simple framework to guarantee safe restarting of a failed operation while providing logging of all operations to the DOM server.
+Each database operation is represented as an ordered set of stored procedures defined in a single PL/SQL package that you develop utilising DOM’s simple framework to guarantee safe restarting of a failed operation.
 
 DOM features include:
 
@@ -30,10 +30,6 @@ Each SP package is initially saved to the DOM repository.  At runtime DOM will c
 * a central runtime logging of your operation down to the SQL level
 
 DOM logs all runtime metrics for each operation across each remote instance and for each of the tasks associated with an operation down to the SQL level.  Such metrics include the execution time for the operation, its tasks and associated SQL, status of each, the SQL text and number of parallel threads used and number of rows processed where appropriate.
-
-* Concurrent processing
-
-For each operation DOM issues a separate Oracle scheduler job on the DOM server for each of the database instances assigned to the operation.  Each job in turn executes the DOM code responsible for remotely executing the uncompleted SP on its assigned Oracle instance
 
 * Simple Framework 
 
