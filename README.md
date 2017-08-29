@@ -33,7 +33,17 @@ DOM logs all runtime metrics for each operation across each remote instance and 
 
 * Simple Framework 
 
-DOM provides a framework which your packages should use to get all the benefits of flexibility of operation, re-startability and logging.  
+DOM provides a framework for your packages which when fully utilised will provide your operations with the full benefits of restartability and central logging.
+
+
+
+
+
+
+
+
+
+ogging.  
 
 * Simple and safe restartability
 
