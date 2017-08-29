@@ -8,7 +8,7 @@ Each database operation is represented as an ordered set of stored procedures de
 
 DOM features include:
 
-* a central Data Repository
+* central Data Repository
 
 The repository defines the data required by DOM to drive the execution of each database operation across your enterprise. Such information includes but is not limited to:
 
@@ -27,7 +27,7 @@ The DOM repository and runtime operations are conducted in their own dedicated d
 
 Each SP package is initially saved to the DOM repository.  At runtime DOM will copy the package to each remote database instance involved in the operation. Note: the repository holds only the package code not any of its dependent objects.
 
-* a central runtime logging of your operation down to the SQL level
+* central runtime logging of your operation down to the SQL level
 
 DOM logs all runtime metrics for each operation across each remote instance and for each of the tasks associated with an operation down to the SQL level.  Such metrics include the execution time for the operation, its tasks and associated SQL, status of each, the SQL text and number of parallel threads used and number of rows processed where appropriate.
 
