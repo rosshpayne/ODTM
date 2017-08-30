@@ -35,7 +35,11 @@ DOM logs all runtime metrics for each operation across each remote instance and 
 
 * Simple Framework 
 
-DOM provides a framework for your packages which when fully utilised will provide your operations with the full benefits of restartability and central logging. 
+DOM’s framework dictates that a table and three stored procedures be included in your package for each operation.  The table is used to hold operation state between execution of each repeatable task. The three manadatory procedures are:
+      — final
+      — initial
+      — iterator
+See example code for further description.
 
 * Simple and safe restartability
 
