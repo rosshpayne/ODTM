@@ -35,10 +35,12 @@ DOM logs all runtime metrics for each operation across each remote instance and 
 
 * Simple Framework 
 
-DOM’s framework dictates that a table and three stored procedures be included in your package for each operation.  The table is used to hold operation state between execution of each repeatable task. The three manadatory procedures are:
-      — final
-      — initial
-      — iterator
+DOM�s framework dictates that a table and three stored procedures be included in your package for each operation.  
+The user-defined table is used to hold operation state between execution of each repeatable task. 
+The three manadatory procedures are:
+        + initial
+        + final
+        + iterator
 See example code for further description.
 
 * Simple and safe restartability
