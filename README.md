@@ -35,8 +35,8 @@ DOM logs all runtime metrics for each operation across each remote instance and 
 
 * Simple Framework 
 
-DOM�s framework dictates that a table and three stored procedures be included in your package for each operation.  
-The user-defined table is used to hold operation state between execution of each repeatable task. 
+DOM's framework requires that for each operation you must create a "state" table and define three stored procedures in your operatino package. 
+The table is used to hold operation state between execution of each repeatable task defined in the operation package. 
 The three manadatory procedures are:
 
         + initial
