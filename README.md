@@ -1,10 +1,12 @@
 # README #
 
+Distributed Operation Manager (DOM) for Oracle
+
 DOM provides a simple framework and execution engine for the purpose of running your complex database maintenance operations across a network of Oracle database instances from a central server, called the DOM-server, in a safe, restartable and scalable fashion.
 
-Complex database operations are usually composed of mulitple steps across multiple database objects where each step must complete successfuly before proceeding to the next step. Alternatively an operation may involve running identical steps over multiple Oracle instances concurrently.  Eitherway, the more complex an operation the easier it becomes to justify the cost of configuring DOM to do it.
+Complex database operations are usually composed of mulitple SQL statements or stored procedure calls applied to one or more database objects (tables, indexes, partitions etc) where each step must complete successfuly before proceeding to the next step. Alternatively an operation may involve running identical steps over multiple Oracle instances concurrently.  Eitherway, the more complex an operation the easier it becomes to justify the cost of configuring DOM to do it.
 
-Each database operation is represented as an ordered set of stored procedures defined in a single PL/SQL package that you develop utilising DOM’s simple framework to guarantee safe restarting of a failed operation.
+The DOM framework requires each database operation be represented as a number of repeatable tasks, each represented as a stored procedure contained in a single PL/SQL package, combined with a table containing state information to guarantee safe restarting of a failed operation.
 
 DOM features include:
 
@@ -33,7 +35,7 @@ DOM logs all runtime metrics for each operation across each remote instance and 
 
 * Simple Framework 
 
-DOM provides a framework which your packages should use to get all the benefits of flexibility of operation, re-startability and logging.  
+DOM provides a framework for your packages which when fully utilised will provide your operations with the full benefits of restartability and central logging. 
 
 * Simple and safe restartability
 
