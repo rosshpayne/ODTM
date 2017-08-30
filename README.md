@@ -31,7 +31,7 @@ Each SP package is initially saved to the DOM repository.  At runtime DOM will c
 
 * central runtime logging of your operation down to the SQL level
 
-DOM logs all runtime metrics for each operation across each remote instance and for each of the tasks associated with an operation down to the SQL level.  Such metrics include the execution time for the operation, its tasks and associated SQL, status of each, the SQL text and number of parallel threads used and number of rows processed where appropriate.
+Each operation generates detailed logging back to the central DOM-server down to the SQL level.  Such metrics include the execution time for the operation, its tasks and associated SQL, status of each, the SQL text and number of parallel threads used and number of rows processed where appropriate.
 
 * Simple Framework 
 
