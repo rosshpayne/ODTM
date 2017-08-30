@@ -6,7 +6,7 @@ DOM provides a simple framework and execution engine to manage the execution of 
 
 Complex database operations are usually composed of mulitple SQL statements or stored procedure calls applied to one or more database objects (tables, indexes, partitions etc) where each step must complete successfuly before proceeding to the next step. Alternatively an operation may involve running identical steps over multiple Oracle instances concurrently.  Eitherway, the more complex an operation the easier it becomes to justify the cost of configuring DOM to do it.
 
-The DOM framework requires each database operation be represented as a number of repeatable tasks, each represented as a stored procedure contained in a single PL/SQL package, combined with a table containing state information to guarantee safe restarting of a failed operation.
+The DOM framework requires each database operation be represented as a number of repeatable tasks, each implemented as a stored procedure contained in a single PL/SQL package, combined with a table containing state information to guarantee safe restarting of a failed operation.
 
 DOM features include:
 
