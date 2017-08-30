@@ -8,14 +8,14 @@ Complex database operations are usually composed of mulitple SQL statements or s
 
 The DOM framework requires each database operation be represented as a number of repeatable tasks, each implemented as a stored procedure contained in a single PL/SQL package, combined with a table containing state information to guarantee safe restarting of a failed operation.
 
-The DOM architecture:
+* The DOM architecture:
 
 The two main server componetns are:
 
-        + DOM-server  -  single database instance which contains the DOM repository and all your code.
+        + DOM-server  -  single database instance which contains the DOM repository, all your code and initiates all operations.
         + DOM-clients -  one client for each database instance that runs an operation.  Requires a DOM-client schema.
-                         DOM will install all code on the client by copying it from the DOM-server during operation intialisation.
-
+                         The DOM-server will install all code on the client during each operation run as part of its initialisation. 
+                         
 DOM features include:
 
 * central Data Repository
