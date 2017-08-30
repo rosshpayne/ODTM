@@ -1,5 +1,7 @@
 # README #
 
+Distributed Operation Manager (DOM) for Oracle
+
 DOM provides a simple framework and execution engine for the purpose of running your complex database maintenance operations across a network of Oracle database instances from a central server, called the DOM-server, in a safe, restartable and scalable fashion.
 
 Complex database operations are usually composed of mulitple SQL statements or stored procedure calls applied to one or more database objects (tables, indexes, partitions etc) where each step must complete successfuly before proceeding to the next step. Alternatively an operation may involve running identical steps over multiple Oracle instances concurrently.  Eitherway, the more complex an operation the easier it becomes to justify the cost of configuring DOM to do it.
@@ -33,17 +35,7 @@ DOM logs all runtime metrics for each operation across each remote instance and 
 
 * Simple Framework 
 
-DOM provides a framework for your packages which when fully utilised will provide your operations with the full benefits of restartability and central logging.
-
-
-
-
-
-
-
-
-
-ogging.  
+DOM provides a framework for your packages which when fully utilised will provide your operations with the full benefits of restartability and central logging. 
 
 * Simple and safe restartability
 
