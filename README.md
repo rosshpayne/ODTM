@@ -47,7 +47,7 @@ See code examples for further descriptions.
 
 * Simple and safe restartability
 
-Should an operation fail DOM will log the error in the central repository. Once you have fixed the reason for the error the DOM administrator merely has to issue the same command used to start the operation.  DOM will restart the operation from the failed task. 
+Should an operation fail DOM will log the error in the central repository. Once you have fixed the reason for the error the DOM administrator merely issues the same command used to start the operation.  DOM will restart the operation from the failed task. 
 
 * Version 1.0 
 
