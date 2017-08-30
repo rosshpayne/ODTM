@@ -51,15 +51,16 @@ g_trailing_months_param  NUMBER;
 default_max_months_purged   NUMBER:=1;
 
 --==============================================================================
+-- save_state - saves operation state data used by repeatable operation task tasks
 --
 -- Raises:
 --==============================================================================
 PROCEDURE  save_state  (p_handle   IN VARCHAR2) IS
 BEGIN
 
-  --DELETE FROM state$kenan_drop_pm WHERE run_id=TO_NUMBER(p_handle);
+  --DELETE FROM state$app_drop_pm WHERE run_id=TO_NUMBER(p_handle);
   
-  INSERT INTO state$kenan_drop_pm(
+  INSERT INTO state$app_drop_pm(
     RUN_ID
    ,PARTITION_NAME
    ,TABLE_TABLESPACE
@@ -91,6 +92,7 @@ BEGIN
    
 END save_state;
 --==============================================================================
+-- get_state - each repeatable operation task uses this procedure to fetch state data.
 --
 -- Raises:
 --==============================================================================
@@ -106,23 +108,17 @@ BEGIN
    ,INSERT_PARTITION
    INTO g_partition_name,g_table_tablespace, g_exchange_table
    ,g_owner,g_table_name ,g_insert_partition
- FROM  state$kenan_drop_pm
+ FROM  state$app_drop_pm
  WHERE run_id=TO_NUMBER(p_handle);
 END get_state;
 --==============================================================================
+-- initial - Optional procedure
 --
+-- DOM will call initial at the start of each operation or any restart of an operation and before 
+-- the first repeatable operation task task is executed.  
+-- Use initial to disable any external systems that you don't want to be running during the 
+-- execution phase of an operation
 --
--- Raises:
---==============================================================================
-PROCEDURE operation_complete (p_message   IN  VARCHAR2)
-AS
-BEGIN
-  COMMIT;  -- this commit prevents ORA-2046, distributed transcation allready begun on MAIN db.
-  raise_application_error(-20100,p_message);
-END operation_complete;
---==============================================================================
---
--- Raises:
 --==============================================================================
 PROCEDURE  initial (p_handle  IN  VARCHAR2) IS
 BEGIN
@@ -136,10 +132,16 @@ BEGIN
   -- 
 END initial;
 --==============================================================================
+-- final - Optional procedure
 --
--- Raises:
+-- DOM will call final after the operation has completed successfully (ie. the iterator 
+-- procedure has raised exception OPERATION_COMPLETED) or after an operation has failed.
+-- Use final to enable any external systems that were disabled prior to
+-- running the operation.
+--
 --==============================================================================
 PROCEDURE  final (p_handle IN VARCHAR2, p_after_error IN CHAR DEFAULT 'N') IS
+-- 
 BEGIN
   DOM.initialise(p_handle);
   get_state(p_handle);
@@ -153,13 +155,14 @@ BEGIN
   --
   IF p_after_error = 'N' 
   THEN
-    DELETE FROM state$kenan_drop_pm WHERE run_id=TO_NUMBER(p_handle);
+    DELETE FROM state$app_drop_pm WHERE run_id=TO_NUMBER(p_handle);
     COMMIT;
   END IF;
   
 END final;
 --==============================================================================
--- REPOPULTE_TABLE
+-- create_exchange_table - repeatable operation task 
+
 --
 -- Raises:
 --=============================================================================
@@ -178,10 +181,9 @@ BEGIN
     
     COMMIT; 
 
-
 END create_exchange_table;
 --==============================================================================
--- EXCHANGE_PARTITION
+-- exchange_partition - repeatable operation task 
 --
 -- Raises:
 --==============================================================================
@@ -211,7 +213,7 @@ BEGIN
 
 END exchange_partition;
 --==============================================================================
--- REPOPULTE_TABLE
+-- segment_contains_data - helper function
 --
 -- Raises:
 --==============================================================================
@@ -229,7 +231,7 @@ WHEN no_data_found THEN
   RETURN FALSE;
 END segment_contains_data;
 --==============================================================================
--- REPOPULTE_TABLE
+-- segment_contains_data - helper function
 --
 -- Raises:
 --==============================================================================
@@ -254,7 +256,7 @@ WHEN no_data_found THEN
   RETURN FALSE;
 END segment_contains_data;
 --==============================================================================
--- REPOPULTE_TABLE
+-- drop_partition - repeatable operation task
 --
 -- Raises:
 --=============================================================================
@@ -300,7 +302,7 @@ BEGIN
     RAISE;
 END get_reinsert_parallel_param;
 --==============================================================================
--- REPOPULTE_TABLE
+-- get_insert_hint_param - helper function
 --
 -- Raises:
 --==============================================================================
@@ -315,7 +317,7 @@ BEGIN
     RAISE;
 END get_insert_hint_param;
 --==============================================================================
--- REPOPULTE_TABLE
+-- repopulate_table - repeatable operation task
 --
 -- Raises:
 --==============================================================================
@@ -406,33 +408,9 @@ BEGIN
     COMMIT;
     
 END repopulate_table;
---==============================================================================
--- submit REPOPULTE_TABLE job
---
--- Raises:
---==============================================================================
-PROCEDURE  repopulate_table_ (p_handle IN VARCHAR2) 
-AS
-BEGIN
-  -- job_action=>'BEGIN DOM$kenan_drop_pm.repopulate_table_job('''||p_handle||''','''||p_mode||'''); END;',
-
-  DBMS_SCHEDULER.CREATE_JOB (
-   job_name=>'TEST',  -- make unique
-   job_type=>'PLSQL_BLOCK',
-   job_action=>'BEGIN DOM$kenan_drop_pm.test_load; END;',
-   number_of_arguments=> 0,
-   start_date=> NULL,  -- run as soon as its enabled, as in now..
-   repeat_interval=>NULL, -- run once
-   end_date=> NULL,
-   job_class=>'DEFAULT_JOB_CLASS',
-   enabled=>TRUE,  -- run now..
-   auto_drop=>TRUE, -- drop meta data associated with job   
-   comments=>'A DOME submitted job');
-
-END  repopulate_table_;
 
 --==============================================================================
--- EXCHANGE_PARTITION
+-- drop_exchange_table - repeatable operation task
 --
 -- Raises:
 --==============================================================================
@@ -452,7 +430,7 @@ BEGIN
 
 END drop_exchange_table;
 --==============================================================================
--- REPOPULTE_TABLE
+-- tablespace_contains_segments - helper function
 --
 -- Raises:
 --==============================================================================
@@ -468,7 +446,7 @@ WHEN no_data_found THEN
   RETURN FALSE;
 END tablespace_contains_segments;
 --==============================================================================
--- REPOPULTE_TABLE
+-- drop_tablespace - repeatable operation task
 --
 -- Raises:
 --==============================================================================
@@ -490,7 +468,7 @@ BEGIN
      DOM.execute_immediate(p_handle, sql_str);
      --
      FOR ind_ IN (SELECT index_tablespace
-                 FROM   state$kenan_drop_ind_ts_pm
+                 FROM   state$app_drop_ind_ts_pm
                  WHERE  partition_position = g_partition_position
                   AND   run_id = TO_NUMBER(p_handle))
      LOOP
@@ -513,7 +491,7 @@ BEGIN
 --
 END drop_tablespace;
 --==============================================================================
--- REPOPULTE_TABLE
+-- get_trailing_months_param - helper function
 --
 -- Raises:
 --==============================================================================
@@ -524,7 +502,7 @@ BEGIN
 
 END get_trailing_months_param;
 --==============================================================================
--- REPOPULTE_TABLE
+-- get_max_months_purged_param - helper function
 --
 -- Raises:
 --==============================================================================
@@ -536,7 +514,7 @@ BEGIN
     RETURN default_max_months_purged;
 END get_max_months_purged_param;
 --==============================================================================
--- GET_PARTITION_NAME
+-- get_exch_table_prefix_  - helper function
 --
 -- Raises:
 --==============================================================================
@@ -548,9 +526,33 @@ WHEN others THEN
   RETURN c_EXCH_TABLE_PREFIX;
 END get_exch_table_prefix_;
 --==============================================================================
--- REPOPULTE_TABLE
+-- operation_complete_  - helper function
 --
 -- Raises:
+--==============================================================================
+PROCEDURE operation_complete_(p_message   IN  VARCHAR2)
+AS
+BEGIN
+  COMMIT;  -- this commit prevents ORA-2046, distributed transcation allready begun on MAIN db.
+  raise_application_error(-20100,p_message);
+END operation_complete_;
+--==============================================================================
+--
+-- iterator - Manadatory DOM procedure.
+--
+-- DOM calls the iterator at the beginning of each operation, on restart and after 
+-- all operation tasks have run successfully to establish if the operation needs
+-- to be run again.
+--
+-- The iterator therefore provides DOM with two important  pieces of information:
+--   1. How many times to execute the operation 
+--   2. For each execution it populates a state table with data to drive the user
+--      defined tasks.
+--
+-- If the iterator determines the operation does not need to be run it raises the 
+-- ORA-20100 exception, Operation completed.
+--
+-- Raises:  20100
 --==============================================================================
 PROCEDURE iterator  (p_handle       IN VARCHAR2
                     ,p_owner        IN VARCHAR2
@@ -617,7 +619,7 @@ BEGIN
         --
         IF hv.partition_position = 1 AND hv.rowsperblock > hv.maxrowsperblock/2
         THEN
-           operation_complete('All trailing months purged');
+           operation_complete_('All trailing months purged');
         END IF;
         SELECT tablespace_name INTO g_table_tablespace
         FROM   dba_tab_partitions
@@ -630,7 +632,7 @@ BEGIN
                      WHERE  index_name   IN (SELECT index_name FROM dba_indexes where table_name = g_table_name and table_owner = g_owner)
                      AND   partition_name = g_partition_name)
         LOOP
-               INSERT INTO state$kenan_drop_ind_ts_pm (run_id,partition_position,index_tablespace)
+               INSERT INTO state$app_drop_ind_ts_pm (run_id,partition_position,index_tablespace)
                VALUES (TO_NUMBER(p_handle),hv.partition_position,ts.tablespace_name);
         END LOOP;
         --
