@@ -9,7 +9,10 @@
   PROCEDURE final                  (p_handle       IN VARCHAR2
                                   , p_after_error  IN CHAR DEFAULT 'N');
   --
-  --  Procedures that define repeatable operation tasks and called by DOM
+  --  Operation:  Drop table partition
+  --
+  --  Procedures below define the repeatable tasks of the drop partition operation
+  --  Procedure names must be entered into the DOM data model (table: DOM$TASKS)
   --
   PROCEDURE  create_exchange_table  (p_handle IN VARCHAR2);
   PROCEDURE  exchange_partition     (p_handle IN VARCHAR2);
