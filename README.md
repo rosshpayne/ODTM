@@ -12,7 +12,9 @@ The DOM framework requires each database operation be represented as a number of
 
 DOM employees a single server with multiple clients model. Further:
 
-        + DOM-server  -  schema which contains the DOM repository, all your code and initiates all operations.
+        + DOM-server  -  schema which contains the DOM repository, all your code and state tables.
+                         DOM executes on this server and initiates all operations remotely 
+                         across DOM-clients.
                          (In the code base this is referred as the MAIN server) 
         + DOM-clients -  one client for each database instance that executes a task in an operation.  
                          Requires a DOM-client schema and DOM$bootstrap package.
