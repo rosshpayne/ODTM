@@ -13,6 +13,8 @@
   --
   --  Procedures below define the repeatable tasks of the drop partition operation
   --  Procedure names must be entered into the DOM data model (table: DOM$TASKS)
+  --  Install on DOM-Server along with the state table.  DOM will remotely copy both 
+  --  to each DOM-Client that has been configured into the operaiton.
   --
   PROCEDURE  create_exchange_table  (p_handle IN VARCHAR2);
   PROCEDURE  exchange_partition     (p_handle IN VARCHAR2);
