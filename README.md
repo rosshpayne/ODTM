@@ -14,9 +14,12 @@ DOM employees a single server with multiple clients model. Further:
 
         + DOM-server  -  schema which contains the DOM repository, all your code and initiates all operations.
                          (In the code base this is referred as the MAIN server) 
-        + DOM-clients -  one client for each database instance that executes a task in an operation.  Requires a DOM-client schema and DOM$bootstrap package.
-                         All DOM-clients should be accessible to the DOM-Server via db-links. 
-                         The DOM-server will remotely install all code on the client during each operation run as part of the initialisation phase.
+        + DOM-clients -  one client for each database instance that executes a task in an operation.  
+                         Requires a DOM-client schema and DOM$bootstrap package.
+                         All DOM-clients should be accessible to the DOM-Server via db-links. The DOM-server should also
+                         be accessible to the DOM-client via db-links.
+                         The DOM-server will remotely install all operation code on the client 
+                         during each operation run as part of the initialisation phase.
                          
 DOM features include:
 
