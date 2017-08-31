@@ -1,6 +1,15 @@
 create or replace 
 PACKAGE         DOM$BOOTSTRAP AS
-
+  --
+  --  Package:       DOM$BOOTSTRAP
+  --  Installed on:  DOM-Client
+  --  Purpose:       Provides initialisation services to the DOM-Server.  
+  --                 It is the only code that is manually installed on the DOM-Client.  
+  --                 All other code is installed by DOM at runtime during initialisation
+  --                 of an operation.
+  --                 Requires a db-link to DOM-Server called MAIN.
+  --
+  --
   procedure initialise ;
 
   procedure cr_synonym (p_synonym IN VARCHAR2);
