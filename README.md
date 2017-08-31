@@ -40,7 +40,7 @@ The DOM repository and runtime operations are conducted in their own dedicated d
 
 * a single code repository for your database packages.
 
-Each SP package is initially saved to the DOM repository.  At runtime DOM will copy the package to each remote database instance involved in the operation. Note: the repository holds only the package code not any of its dependent objects.
+All your pacakges are installed or upgraded on the DOM repository only.  At runtime DOM will remotely copy the relevant package to each database instance involved in the operation. Note: the repository holds only the package code not any of its dependent objects.
 
 * central runtime logging of your operation down to the SQL level
 
