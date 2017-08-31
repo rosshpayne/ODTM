@@ -1,14 +1,24 @@
 create or replace 
-PACKAGE          "DOM$MAIN" AS
-  -- runs operation across multiple databases (if configured)
-  -- runs operation on a database. Designed so scheduler can parallelise across dbs.
-  PROCEDURE  run_op( p_operation_id                  IN NUMBER
+PACKAGE          "DOMOWN"."DOM$MAIN" AS
+  --
+  --  Package:       DOM$MAIN
+  --  Installed on:  DOM-Server
+  --  Purpose:  This is the main package of the DOM system.  It drives off the data held
+  --  in the DOM repository.  Its main task is to initiate your operations across a 
+  --  network of db instances via remote SQL and provide restartability of all operations.  
+  --            
+  -- -------------------------------------------------------------------------------------
+  --
+  --  Procedure:   run_op
+  --  Purpose:     this is the main API call to run an operation
+  -- 
+  PROCEDURE  run_op( p_operation_id                 IN NUMBER
                   , p_environment_id                IN NUMBER
                   , p_op_instance                   IN NUMBER DEFAULT 1
                   , p_mode                          IN CHAR DEFAULT 'R'
                   , p_run_constructor_after_error   IN CHAR DEFAULT 'N'
                   ) ;
-
+   -- ----------------------------------------------------------------------------------------
 --  PROCEDURE  run_op        ( p_operation_name   IN VARCHAR2
 --                            ,p_environment_code IN VARCHAR2);
 
@@ -61,7 +71,7 @@ PACKAGE          "DOM$MAIN" AS
 
 END DOM$MAIN;
 /
-  CREATE OR REPLACE PACKAGE BODY "ORADBA"."DOM$MAIN" AS
+  CREATE OR REPLACE PACKAGE BODY "DOMOWN"."DOM$MAIN" AS
 
 c_SRC_VERSION        CONSTANT  VARCHAR2(5):='2.2';
 c_COMPLETED          CONSTANT  DOM$task_log.status%TYPE:='C';
