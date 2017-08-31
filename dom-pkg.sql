@@ -1,10 +1,11 @@
 -------------------------------------------------------
 
   CREATE OR REPLACE PACKAGE "DOMOWN"."DOM" AS
-  --  
-  -- Installed in DOM-Server.
+  -- 
+  -- Package:       DOM
+  -- Installed on:  DOM-Server
+  -- Purpose:  Provides helper procedures for your operation package
   -- DOM will remotely copy to each remote db instance at runtime
-  -- Provides helper procedures to your operation package.
   --
   operation_complete           EXCEPTION;
   --
