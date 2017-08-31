@@ -30,6 +30,10 @@ The repository defines the data required to drive DOMs execution of database ope
     + user defined parameters (key-value pairs) to drive your code logic 
     + detailed runtime logging of all operations, tasks and SQL
 
+* Self installing
+
+The DOM-server is responsible for installing on each DOM-client your package code required to run the operation. This happens before each operation run.
+
 * secure implementation
 
 The DOM repository and runtime operations are conducted in their own dedicated database schemas which follow minimum privileges model. The DOM server schema has privileges to maintain the repository while each remote instance has a DOM schema with sufficient privileges (usually at a DBA level) to perform the database operations required.
