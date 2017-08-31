@@ -18,10 +18,10 @@ DOM employees a single server with multiple clients model. Further:
                          (In the code base this is referred as the MAIN server) 
         + DOM-clients -  one client for each database instance that executes a task in an operation.  
                          Requires a DOM-client schema and DOM$bootstrap package.
-                         All DOM-clients should be accessible to the DOM-Server via db-links. The DOM-server should also
-                         be accessible to the DOM-client via db-links.
+                         All DOM-clients should be accessible to the DOM-Server via db-links. 
+                         The DOM-server should also be accessible to the DOM-client via a db-link.
                          The DOM-server will remotely install your operation package and state table on the client 
-                         during at runtime during the initialisation phase of each operation.
+                         at runtime during the initialisation phase of each operation.
                          
 DOM features include:
 
