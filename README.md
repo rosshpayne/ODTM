@@ -4,13 +4,13 @@ Distributed Operation Manager (DOM) for Oracle
 
 DOM provides a simple framework and execution engine to manage the execution of your complex database maintenance operations across a network of Oracle database instances from a central server, called the DOM-server, in a safe, restartable and scalable fashion.
 
-Complex database operations are usually composed of mulitple SQL statements or stored procedure calls applied to one or more database objects (tables, indexes, partitions etc) where each step must complete successfuly before proceeding to the next step. Alternatively an operation may involve running identical steps over multiple Oracle instances concurrently.  Eitherway, the more complex an operation the easier it becomes to justify the cost of configuring DOM to do it.
+Complex database operations are usually composed of mulitple SQL statements and/or stored procedure calls applied to one or more database objects (tables, indexes, partitions etc) where each step must complete successfuly before proceeding to the next step. Alternatively, an operation may involve running identical steps over multiple Oracle instances concurrently.  Eitherway, the more complex an operation the easier it becomes to justify the cost of configuring DOM to do it.
 
 The DOM framework requires each database operation be represented as a number of repeatable tasks, each implemented as a stored procedure contained in a single PL/SQL package, combined with a table containing state information to guarantee safe restarting of a failed operation.
 
 * The DOM architecture:
 
-The two server components are:
+DOM employees a singler server with multiple clients model. Further:
 
         + DOM-server  -  single database instance which contains the DOM repository, all your code and initiates all operations.
                          (In the code base this is referred as the MAIN server) 
@@ -21,7 +21,7 @@ DOM features include:
 
 * central Data Repository
 
-The repository defines the data required by DOM to drive the execution of each database operation across your enterprise. Such information includes but is not limited to:
+The repository defines the data required to drive DOMs execution of database operation across the enterprise. Such information includes but is not limited to:
 
     + database environments types (dev,test,prod etc)
     + the Oracle instances that belong to those environments
@@ -32,7 +32,7 @@ The repository defines the data required by DOM to drive the execution of each d
 
 * secure implementation
 
-The DOM repository and runtime operations are conducted in their own dedicated database schemas with minimum privileges. The DOM server schema has privileges to maintain the repository while each remote instance has a DOM schema with sufficient privileges (usually at a DBA level) to perform the database operations required.
+The DOM repository and runtime operations are conducted in their own dedicated database schemas which follow minimum privileges model. The DOM server schema has privileges to maintain the repository while each remote instance has a DOM schema with sufficient privileges (usually at a DBA level) to perform the database operations required.
 
 * a single code repository for your database packages.
 
