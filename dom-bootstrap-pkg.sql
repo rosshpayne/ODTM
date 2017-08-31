@@ -36,26 +36,12 @@ PROCEDURE initialise
 AS
 dummy_   PLS_INTEGER;
 BEGIN
-/*
-      BEGIN
-      SELECT 1 INTO dummy_
-      FROM   USER_DB_LINKS
-      WHERE  db_link = 'MAIN';
-      EXCEPTION
-      WHEN no_data_found THEN NULL;
-        COMMIT;
-        EXECUTE IMMEDIATE 'create database link MAIN using '''||p_network_name||''' ';
-      END;
-*/
       COMMIT;
-  dbms_output.put_line('transfer DOM packge');
       --
       load('DOM');
       --
 END initialise;
 --==============================================================================
-
-
 --
 --
 --==============================================================================
@@ -64,27 +50,21 @@ END initialise;
 PROCEDURE cr_synonym (p_synonym   IN VARCHAR2)
 AS
 BEGIN
-      --dbms_output.put_line('create or replace synonym '||p_synonym||' for '||p_synonym||'@MAIN');
       COMMIT;
-     -- ??? remove reference to ORADBA
-      EXECUTE IMMEDIATE 'create or replace synonym '||p_synonym||' for ORADBA.'||p_synonym||'@MAIN';
+      --
+      EXECUTE IMMEDIATE 'create or replace synonym '||p_synonym||' for DOMOWN.'||p_synonym||'@MAIN';
       COMMIT;
 
 END cr_synonym;
 
 --==============================================================================
-
-
 --
 --
 --==============================================================================
-
-
 PROCEDURE cr_table (p_tabname   IN VARCHAR2)
 AS
 dummy_   CHAR;
 BEGIN
-      --dbms_output.put_line('create table '||p_tabname||' as select * from '||p_tabname||'@MAIN');
       COMMIT;
       --
       -- create table
@@ -99,13 +79,9 @@ BEGIN
 
 END cr_table;
 --==============================================================================
-
-
 --
 --
 --==============================================================================
-
-
 PROCEDURE transfer_code(p_name	IN VARCHAR2)
 IS
 BEGIN
@@ -115,8 +91,10 @@ BEGIN
   COMMIT;
 
 END transfer_code;
-
-
+--==============================================================================
+--
+--
+--==============================================================================
 PROCEDURE load (p_name IN VARCHAR2)
 IS
 TYPE cv is REF CURSOR;
@@ -130,7 +108,6 @@ BEGIN
   --
   --  Transfer only if package does not exist on remote db
   --  or remote version is older than version on MAIN server.
-dbms_output.put_line('load -> '||p_name);
 
   FOR obj IN ( SELECT 1, object_type type
               FROM   USER_OBJECTS
@@ -141,7 +118,7 @@ dbms_output.put_line('load -> '||p_name);
                                       WHERE  object_type = 'PACKAGE'
                                        AND   object_name = upper(p_name))
               UNION
-SELECT 3, object_type
+              SELECT 3, object_type
               FROM   USER_OBJECTS
               WHERE  object_type = 'PACKAGE BODY'
                AND   object_name = upper(p_name)
@@ -150,7 +127,7 @@ SELECT 3, object_type
                                       WHERE  object_type = 'PACKAGE BODY'
                                        AND   object_name = upper(p_name))
               UNION
-SELECT 2, object_type
+              SELECT 2, object_type
               FROM   USER_OBJECTS@MAIN
               WHERE  object_type = 'PACKAGE'
                AND   object_name = upper(p_name)
@@ -159,7 +136,7 @@ SELECT 2, object_type
                                   WHERE  object_type = 'PACKAGE'
                                    AND   object_name = upper(p_name))
               UNION
-SELECT 4, object_type
+              SELECT 4, object_type
               FROM   USER_OBJECTS@MAIN
               WHERE  object_type = 'PACKAGE BODY'
                AND   object_name = upper(p_name)
