@@ -14,8 +14,8 @@ The two server components are:
 
         + DOM-server  -  single database instance which contains the DOM repository, all your code and initiates all operations.
                          (In the code base this is referred as the MAIN server) 
-        + DOM-clients -  one client for each database instance that runs an operation.  Requires a DOM-client schema.
-                         The DOM-server will install all code on the client during each operation run as part of its initialisation. 
+        + DOM-clients -  one client for each database instance that executes an operation.  Requires a DOM-client schema and DOM$bootstrap package.
+                         The DOM-server will remotely install all code on the client during each operation run as part of the initialisation phase.
                          
 DOM features include:
 
