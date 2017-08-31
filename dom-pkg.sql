@@ -1,18 +1,32 @@
 -------------------------------------------------------
 
-  CREATE OR REPLACE PACKAGE "ORADBA"."DOM" AS
-
+  CREATE OR REPLACE PACKAGE "DOMOWN"."DOM" AS
+  --  
+  -- Installed in DOM-Server.
+  -- DOM will remotely copy to each remote db instance at runtime
+  -- Provides helper procedures to your operation package.
+  --
   operation_complete           EXCEPTION;
-
+  --
+  --  Should be first statement in each stored procedure that represents 
+  --  a repeatable task in your operation package.
+  --  Uses DBMS_APPLICAITON_INFO to identify your db session on the DOM-client
+  -- 
   PROCEDURE initialise      (p_handle   IN VARCHAR2
                            , p_module   IN VARCHAR2 DEFAULT NULL
                            , p_action   IN VARCHAR2 DEFAULT NULL);
-
+  --
+  --  All your repeatable task stored procedures should execute their dynamic SQL
+  --  via this procedure. 
+  --  This will execute the SQL and log it in the DOM-server table
+  --  DOM$SQL_LOG.
+  -- 
   PROCEDURE execute_immediate (  p_handle       IN VARCHAR2
                                 ,p_sql_str                IN VARCHAR2
                                 ,p_alter_session IN VARCHAR2 DEFAULT NULL);
-
-
+  --
+  --  Helper functions to fetch parameter data from DOM-server parameter table.
+  -- 
   FUNCTION get_num_param    (p_handle       IN VARCHAR2
                             ,p_name         IN VARCHAR2
                             ,p_object_name  IN VARCHAR2) RETURN NUMBER;
