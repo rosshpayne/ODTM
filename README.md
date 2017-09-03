@@ -18,27 +18,22 @@ A typically scenario that demonstrates restartability of an operation is a follo
 		
 		SQL> execute DOM$MAIN.run_op ( 12, 1)
 
-            where 12 is the operation_id which defines a 7 step (task) operation
+            where 12 is the operation_id which defines a 7 step operation say.
             and 1 is the environment_id such as PRODUCTION, UAT, TEST which has an assocated set of db  instances.
 
 	2. Operation fails with a space issue (say) at task 4. DOM aborts and writes the error to various log tables.  
 	   There remains 3 other tasks to complete however.
-           Review the reasons for the failuser using the following SQL:
+       
+           Review the reasons for the failuser using one or all the following SQL:
 
-		SQL>  select run_id FROM 
-      			(SELECT id, status ,run_mode,instance_startup,username,client_process_id,serial ,sid, max(id) over () max_id
-      			 FROM   DOM$run_log 
-       			WHERE  operation_id       = 12
-        		AND   operation_instance = 1
-        		AND   environment_id     = 1
-        		AND   run_mode           = 'R'
-      			) tab
-  	              WHERE tab.id=tab.max_id;
-		SQL>  select * from DOM$task_log
-		SQL>  select * from DOM$sql_log
+		SQL>  select * from DOM$run_log  where id = g_run_id
+		SQL>  select * from DOM$task_log where run_id = g_run_id
+		SQL>  select * from DOM$sql_log  where run_id = g_run_id
 	
 
- 	3.   Restart the operation using the SQL from step 1.   DOM will automatically run tasks 4,5,6 and 7
+ 	3.   Restart the operation using the SQL from step 1.   
+    
+         DOM will automatically run tasks 4,5,6 and 7
 
 * The DOM architecture:
 
