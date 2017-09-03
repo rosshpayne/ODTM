@@ -22,7 +22,7 @@ A typically scenario that demonstrates restartability of an operation is a follo
             and 1 is the environment_id such as PRODUCTION, UAT or TEST with its associated db instances.
 
 	2. Operation fails with a space issue (say) at task 4. DOM aborts and writes the error to various log tables.  
-	   There remains 3 other tasks to complete however.
+	   There remains task 4 plus 3 other tasks to complete however.
        
            Review the reasons for the failure using one or all of the following SQL:
 
@@ -33,9 +33,9 @@ A typically scenario that demonstrates restartability of an operation is a follo
 
  	3.   Fix the space issue 
     
-    4.   Restart the operation using the SQL from step 1.   
+    	4.   Restart the operation using the SQL from step 1.   
     
-         DOM will automatically run the remaining tasks 4,5,6 and 7
+       	     DOM will automatically run the remaining tasks starting at task 4.
 
 * The DOM architecture:
 
