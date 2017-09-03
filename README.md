@@ -19,7 +19,7 @@ A typically scenario that demonstrates restartability of an operation is a follo
 		SQL> execute DOM$MAIN.run_op ( 12, 1)
 
             where 12 is the operation_id which defines a 7 step operation say.
-            and 1 is the environment_id such as PRODUCTION, UAT, TEST which has an assocated set of db  instances.
+            and 1 is the environment_id such as PRODUCTION, UAT or TEST with its associated db instances.
 
 	2. Operation fails with a space issue (say) at task 4. DOM aborts and writes the error to various log tables.  
 	   There remains 3 other tasks to complete however.
@@ -42,7 +42,7 @@ A typically scenario that demonstrates restartability of an operation is a follo
 DOM employees a single server with multiple clients model. Further:
 
         + DOM-server  -  schema which contains the DOM repository, all your code and state tables.
-                         DOM executes on this server and initiates all operations remotely 
+                         DOM executes operation from this server and initiates all operations remotely 
                          across DOM-clients.
                          (In the code base this is referred as the MAIN server) 
         + DOM-clients -  one client for each database instance that executes a task in an operation.  
