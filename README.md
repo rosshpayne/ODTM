@@ -35,7 +35,7 @@ A typically scenario that demonstrates restartability of an operation is a follo
     
     4.   Restart the operation using the SQL from step 1.   
     
-         DOM will automatically run tasks 4,5,6 and 7
+         DOM will automatically run the remaining tasks 4,5,6 and 7
 
 * The DOM architecture:
 
