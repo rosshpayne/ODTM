@@ -33,9 +33,9 @@ A typically scenario that demonstrates restartability of an operation is a follo
 
  	3.   Fix the space issue 
     
-    	4.   Restart the operation using the SQL from step 1.   
+   	4.   Restart the operation using the SQL from step 1.   
     
-       	     DOM will automatically run the remaining tasks starting at task 4.
+  	     DOM will automatically run the remaining tasks starting at task 4.
 
 * The DOM architecture:
 
