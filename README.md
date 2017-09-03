@@ -24,14 +24,16 @@ A typically scenario that demonstrates restartability of an operation is a follo
 	2. Operation fails with a space issue (say) at task 4. DOM aborts and writes the error to various log tables.  
 	   There remains 3 other tasks to complete however.
        
-           Review the reasons for the failuser using one or all the following SQL:
+           Review the reasons for the failure using one or all of the following SQL:
 
 		SQL>  select * from DOM$run_log  where id = g_run_id
 		SQL>  select * from DOM$task_log where run_id = g_run_id
-		SQL>  select * from DOM$sql_log  where run_id = g_run_id
+		SQL>  select * from DOM$sql_log  where task_log_id = g_task_log_id
 	
 
- 	3.   Restart the operation using the SQL from step 1.   
+ 	3.   Fix the space issue 
+    
+    4.   Restart the operation using the SQL from step 1.   
     
          DOM will automatically run tasks 4,5,6 and 7
 
