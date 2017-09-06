@@ -24,7 +24,7 @@ A typically scenario that demonstrates restartability of an operation is a follo
 	2. Operation fails with a space issue (say) at task 4. DOM aborts and writes the error to various log tables.  
 	   There remains task 4 plus 3 other tasks to complete however.
        
-           Review the reasons for the failure using one or all of the following SQL:
+           Review the reasons for the failure referencing one or all of the following log tables:
 
 		SQL>  select * from DOM$run_log  where id = g_run_id
 		SQL>  select * from DOM$task_log where run_id = g_run_id
