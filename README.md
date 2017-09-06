@@ -8,7 +8,7 @@ Complex database operations are usually composed of mulitple SQL statements and/
 
 The DOM framework requires each database operation be represented as a number of repeatable tasks, each implemented as a stored procedure contained in a single PL/SQL package, combined with a table containing state information to guarantee safe restarting of a failed operation.
 
-* Purpose	
+* Usage example	
 
 DOM performs two major tasks, it centralises all scheduling and logging of database operations and enables full restartability of an operation.
 
