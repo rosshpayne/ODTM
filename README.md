@@ -67,7 +67,7 @@ The repository defines the data required to drive DOMs execution of database ope
 
 * Self installing
 
-The DOM-server is responsible for installing your package code on each DOM-client prior to initiating the operation remotely.
+The DOM-server is responsible for installing your package code, representing the repeatable tasks in an operation, across each of the associated DOM-clientis (usually just one) prior to initiating the operation on each db instance.
 
 * secure implementation
 
