@@ -26,8 +26,8 @@ A typically scenario that demonstrates restartability of an operation is a follo
        
            Review the reasons for the failure referencing one or all of the following log tables:
 
-		SQL>  select * from DOM$run_log  where id = g_run_id
-		SQL>  select * from DOM$task_log where run_id = g_run_id
+		SQL>  select * from DOM$run_log  where id = DOM$MAIN.get_run_id(17,1)
+		SQL>  select * from DOM$task_log where run_id = DOM$MAIN.get_run_id(17,1)
 		SQL>  select * from DOM$sql_log  where task_log_id = g_task_log_id
 	
 
