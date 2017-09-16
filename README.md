@@ -10,21 +10,25 @@ The DOM framework requires each database operation be represented as a number of
 
 * Usage example	
 
-DOM performs two major tasks, it centralises all scheduling and logging of database operations and enables full restartability of an operation.
+The following demonstrates the two of the basic features of DOM, operation restartability centralised logging.
 
-A typically scenario that demonstrates restartability of an operation is a follows:
 
-	1.  Start operation using PL/SQL API
+    0.  Configure your database environment, operation tasks, install code, state tables and database links
+        into the DOM-server repository. This is a one off task.
+        
+    1.  Start operation using PL/SQL API
 		
 		SQL> execute DOM$MAIN.run_op ( 12, 1)
 
-            where 12 is the operation_id which defines a 7 step operation say.
-            and 1 is the environment_id such as PRODUCTION, UAT or TEST with its associated db instances.
+            where 12 is the operation_id which you have defined to be a 7 step operation in this example.
+            Item 1 is the environment_id, such as PRODUCTION, UAT or TEST, with its associated db instance.
+            
+       The above API is typically executed via a scheduler of your choice.
 
-	2. Operation fails with a space issue (say) at task 4. DOM aborts and writes the error to various log tables.  
+	2. Operation fails with a space issue (say) at step/task 4. DOM aborts and writes the error to various log tables.  
 	   There remains task 4 plus 3 other tasks to complete however.
        
-           Review the reasons for the failure referencing one or all of the following log tables:
+           Review the reason for the failure by refering to one or all of the following log tables in the DOM-server:
 
 		SQL>  select * from DOM$run_log  where id = DOM$MAIN.get_run_id(17,1)
 		SQL>  select * from DOM$task_log where run_id = DOM$MAIN.get_run_id(17,1)
@@ -36,7 +40,9 @@ A typically scenario that demonstrates restartability of an operation is a follo
    	4.   Restart the operation using the SQL from step 1.   
     
   	     DOM will automatically run the remaining tasks starting at task 4.
-
+         
+    This example shows just one operation which maybe one amoungst hundreds that are being executed concurrently by DOM
+    
 * The DOM architecture:
 
 DOM employees a single server with multiple clients model. Further:
