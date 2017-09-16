@@ -10,7 +10,7 @@ The DOM framework requires each database operation be represented as a number of
 
 * Usage example	
 
-The following demonstrates the two of the basic features of DOM, operation restartability centralised logging.
+The following demonstrates three of the basic features of DOM, centralised configuration, operation restartability and centralised logging.
 
 
     0.  Configure your database environment, operation tasks, install code, state tables and database links
