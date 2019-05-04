@@ -2,12 +2,11 @@
 
 Distributed Operation Manager (DOM) for Oracle
 
-DOM provides a simple framework and execution engine to manage the execution of your complex database maintenance operations across a network of Oracle database instances from a central server, called the DOM-server, in a safe, restartable and scalable fashion.
+DOM provides a simple framework to execute your complex database maintenance operations from a central database, called the DOM-server, remotely across a network of Oracle database instances, in a safe, restartable and scalable fashion.
 
-Complex database operations are usually composed of mulitple SQL statements and/or stored procedure calls applied to one or more database objects (tables, indexes, partitions etc) where each step must complete successfuly before proceeding to the next step. Alternatively, an operation may involve running identical steps over multiple Oracle instances concurrently.  Eitherway, the more complex an operation the easier it becomes to justify the cost of configuring DOM to do it.
+Complex database operations are usually composed of mulitple SQL statements and/or stored procedure applied to one or more database objects (tables, indexes, partitions etc) where each step must complete successfuly before proceeding to the next step. Alternatively, an operation may involve running identical steps over multiple Oracle instances concurrently.  Eitherway, the more complex an operation the easier it becomes to justify the cost of configuring DOM to do it.
 
-The DOM framework requires each database operation be represented as a number of repeatable tasks, each implemented as a stored procedure contained in a single PL/SQL package, combined with a table containing state information to guarantee safe restarting of a failed operation.
-Think of DOM as a state machine for complex database administration operations.
+The DOM framework requires each of your maintenance opeations be packaged into a single DOM package where each step is represented as a stored proc call.
 
 * Usage example	
 
