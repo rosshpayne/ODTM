@@ -1,34 +1,41 @@
 # README #
 
-Distributed Operation Manager (DOM) for Oracle
+Oracle Distributed Task Manager (aka DOM) 
 
-DOM provides a simple framework to execute your complex database maintenance operations from a central database, called the DOM-server, remotely across a network of Oracle database instances, in a safe, restartable and scalable fashion.
+ODTM provides a simple framework to manage and execute complex database maintenance operations from a central database repository, called the DTM-server, across a network of remote Oracle database instances, in a safe, restartable and scalable fashion.
 
-Complex database operations are usually composed of mulitple SQL statements and/or stored procedure applied to one or more database objects (tables, indexes, partitions etc) where each step must complete successfuly before proceeding to the next step. Alternatively, an operation may involve running identical steps over multiple Oracle instances concurrently.  Eitherway, the more complex an operation the easier it becomes to justify the cost of configuring DOM to do it.
+Complex database operations, such as archiving and purging multiple hundreds if not billions of records at a time are usually composed of mulitple tasks where each task typically comprises a single SQL that impacts a single partition of a table or index as an example. In addition, some operations may involve running the same task (simple or complex) across multiple Oracle instances concurrently.  Eitherway, ODTM provides a framework that enables these operations to be run not only in parallel but also in a completely restartable fashion should any individual task fail for operational reasons. In addition, you can monitor the progress of the operation across each instance from three levels. At the individual SQL statement, the individual task and at the highest level of the operation. You can see the start time and complete time of each SQL statement, task or operation along with any errors that maybe generated. Also, when applicable the SQL logging records the number of rows impacted.
 
-The DOM framework requires each of your maintenance opeations be packaged into a single DOM package where each step is represented as a stored proc call.
+You can halt an operation at any stage and resume it at a later time.
+
+The DTM framework requires each of your maintenance opeations be packaged into a single PLSQL package where each task and its associated SQL, is represented as a stored proc call.
 
 * Usage example	
 
-The following demonstrates three of the basic features of DOM, centralised configuration and logging and automatic operation restartability.
+The following demonstrates three of the basic features of DTM, the centralised configuration and execution management, realtime logging and the automatic restartability of an operation.
 
 
-    0.  Configure your database environment, operation tasks, install code, state tables and database links
-        into the DOM-server repository. This is a one off task.
+    0.  Configure your database environment, install ALL your DTM packages, state tables and database links
+        into a nominated DTM-Oracle instance. This is a one off task. 
+	The DTM-Oracle instance is where you issue DTM commands and contains the log data of all operations and tasks across
+	each database instance involved in an operation.
+	It is not necessary to log into any remote database involved in an operation to monitor the operations progress or
+	issue commands to start or stop a task. Everything is managed from the DTM-Oracle instance.
         
     1.  Start operation using PL/SQL API
 		
 		SQL> execute DOM$MAIN.run_op ( 12, 1)
 
-            where 12 is the operation_id which you have defined to be a 7 step operation in this example.
-            Item 1 is the environment_id, such as PRODUCTION, UAT or TEST, with its associated db instance.
+            where 12 is the operation_id which you have defined, in this example, to be a 7 step operation .
+            The second argument is the environment_id, such as PRODUCTION, UAT or TEST, with its associated db instance.
             
        The above API is typically executed via a scheduler of your choice.
 
-	2. Operation fails with a space issue (say) at step/task 4. DOM aborts and writes the error to various log tables.  
+	2. Unfortunately the operation fails with a space issue (say) at step/task 4. 
+	   DTM aborts and writes the error to various log tables on the central management instance.  
 	   There remains task 4 plus 3 other tasks to complete however.
        
-           Review the reason for the failure by refering to one or all of the following log tables in the DOM-server:
+           Review the reason for the failure by refering to one or all of the following log tables in the DTM-server:
 
 		SQL>  select * from DOM$run_log  where id = DOM$MAIN.get_run_id(17,1)
 		SQL>  select * from DOM$task_log where run_id = DOM$MAIN.get_run_id(17,1)
@@ -39,30 +46,30 @@ The following demonstrates three of the basic features of DOM, centralised confi
     
    	4.   Restart the operation using the SQL from step 1.   
     
-  	     DOM will automatically run the remaining tasks starting at task 4.
+  	     DTM will automatically run the remaining tasks starting at task 4.
          
-    This example shows just one operation which maybe one amoungst hundreds that are being executed concurrently by DOM
+    This example shows just one operation which maybe one amoungst hundreds that are being executed concurrently by DTM
     
-* The DOM architecture:
+* The DTM architecture:
 
-DOM employees a single server with multiple clients model. Further:
+DTM employees a single server with multiple clients model. Further:
 
-        + DOM-server  -  schema which contains the DOM repository, all your code and state tables.
-                         DOM executes operation from this server and initiates all operations remotely 
-                         across DOM-clients.
-                         (In the code base this is referred as the MAIN server) 
-        + DOM-clients -  one client for each database instance that executes a task in an operation.  
-                         Requires a DOM-client schema and DOM$bootstrap package.
-                         All DOM-clients should be accessible to the DOM-Server via db-links. 
-                         The DOM-server should also be accessible to the DOM-client via a db-link.
-                         The DOM-server will remotely install your operation package and state table on the client 
+        + DTM-server  -  schema which contains the DTM configuration repository, all your code and state tables.
+                         DTM executes operation from this server and initiates all operations remotely 
+                         across DTM-clients.
+                         (In the code this is referred as the MAIN server) 
+        + DTM-clients -  one client for each database instance that executes a task in an operation.  
+                         Requires a DTM-client schema and DOM$bootstrap package.
+                         All DTM-clients should be accessible to the DTM-Server via db-links. 
+                         The DTM-server should also be accessible to the DTM-client via a db-link.
+                         The DTM-server will remotely install your operation package and state table on the client 
                          at runtime during the initialisation phase of each operation.
                          
 DOM features include:
 
 * central Data Repository
 
-The repository defines the data required to drive DOMs execution of database operation across the enterprise. Such information includes but is not limited to:
+The repository defines the data required to drive DTMs execution of database operation across the enterprise. Such information includes but is not limited to:
 
     + database environments types (dev,test,prod etc)
     + the Oracle instances that belong to those environments
@@ -73,23 +80,23 @@ The repository defines the data required to drive DOMs execution of database ope
 
 * Self installing
 
-The DOM-server is responsible for installing your package code, representing the repeatable tasks in an operation, and associated state table across each DOM-client associated with each operation during the initialisation phase of each operation execution.
+The DTM-server is responsible for installing your package code, representing the repeatable tasks in an operation, and associated state table across each DTM-client associated with each operation during the initialisation phase of each operation execution.
 
 * secure implementation
 
-The DOM repository and runtime operations are conducted in their own dedicated database schemas which follow minimum privileges model. The DOM server schema has privileges to maintain the repository while each remote instance has a DOM schema with sufficient privileges (usually at a DBA level) to perform the database operations required.
+The DTM configuration repository and runtime operations are conducted in their own dedicated database schemas which should follow a minimum privileges model. The DTM server schema has privileges to maintain the repository while each remote instance has a DOM schema with sufficient privileges (usually at a DBA level) to perform the database operations required.
 
 * a single code repository for your database packages.
 
-All your pacakges are installed or upgraded on the DOM repository only.  At runtime DOM will remotely copy the relevant package to each database instance involved in the operation. Note: the repository holds only the package code not any of its dependent objects.
+All your pacakges are installed or upgraded on the DOM repository only.  At runtime DTM will remotely copy the relevant package to each database instance involved in the operation. Note: the repository holds only the package code not any of its dependent objects.
 
 * central runtime logging of your operation down to the SQL level
 
-Each operation generates detailed logging back to the central DOM-server down to the SQL level.  Such metrics include the execution time for the operation, its tasks and associated SQL, status of each, the SQL text and number of parallel threads used and number of rows processed where appropriate.
+Each operation generates detailed logging back to the central DTM-server down to the SQL level.  Such metrics include the execution time for the operation, its tasks and associated SQL, status of each, the SQL text and number of parallel threads used and number of rows processed where appropriate.
 
 * Simple Framework 
 
-DOM's framework requires that for each operation you must create a "state" table and define three stored procedures in your operatino package. 
+DTM's framework requires that for each operation you must create a "state" table and define three stored procedures in your operatino package. 
 The table is used to hold operation state between execution of each repeatable task defined in the operation package. 
 The three manadatory procedures are:
 
