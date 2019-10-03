@@ -2,9 +2,9 @@
 
 Oracle Distributed Task Manager (aka DOM) 
 
-ODTM provides a simple framework to manage and execute complex database maintenance operations from a central database repository, called the DTM-server, across a network of remote Oracle database instances, in a safe, restartable and scalable fashion.
+ODTM provides a simple framework to manage and execute complex database maintenance operations from a central database instance, called the DTM-server, across a network of remote Oracle database instances, in a safe, restartable and scalable fashion.
 
-Complex database operations, such as archiving and purging multiple hundreds if not billions of records at a time are usually composed of mulitple tasks where each task typically comprises a single SQL that impacts a single partition of a table or index as an example. In addition, some operations may involve running the same task (simple or complex) across multiple Oracle instances concurrently.  Eitherway, ODTM provides a framework that enables these operations to be run not only in parallel but also in a completely restartable fashion should any individual task fail for operational reasons. In addition, you can monitor the progress of the operation across each instance from three levels. At the individual SQL statement, the individual task and at the highest level of the operation. You can see the start time and complete time of each SQL statement, task or operation along with any errors that maybe generated. Also, when applicable the SQL logging records the number of rows impacted.
+Complex database operations, such as archiving and purging multiple hundreds if not billions of records at a time are usually comprised of mulitple tasks, where each task typically comprises one maybe two SQL statements that impact a single partition of a table or index as an example. In addition, some operations may involve running the same task (simple or complex) across multiple Oracle instances concurrently.  Eitherway, ODTM provides a framework that enables these operations to be run not only in parallel but also in a completely restartable fashion should any individual task fail for operational reasons. In addition, you can monitor the progress of an operation across multiple instances from the central DTM-server instance down to the individual SQL statement level. You can review the start time and end time of each SQL statement, each individual task and at the highest level of the operation. Also, when applicable, the logging records the number of rows impacted for each SQL statement.
 
 You can halt an operation at any stage and resume it at a later time.
 
@@ -22,17 +22,17 @@ The following demonstrates three of the basic features of DTM, the centralised c
 	It is not necessary to log into any remote database involved in an operation to monitor the operations progress or
 	issue commands to start or stop a task. Everything is managed from the DTM-Oracle instance.
         
-    1.  Start operation using PL/SQL API
+    1.  Start operation using PLSQL API
 		
 		SQL> execute DOM$MAIN.run_op ( 12, 1)
 
-            where 12 is the operation_id which you have defined, in this example, to be a 7 step operation .
-            The second argument is the environment_id, such as PRODUCTION, UAT or TEST, with its associated db instance.
+            where 12 represents the operation id which you have defined, in this example, to be a 7 step operation .
+            The second argument is the environment id, such as PRODUCTION, UAT or TEST.
             
        The above API is typically executed via a scheduler of your choice.
 
 	2. Unfortunately the operation fails with a space issue (say) at step/task 4. 
-	   DTM aborts and writes the error to various log tables on the central management instance.  
+	   DTM aborts and writes the error to various log tables on the central DTM-server instance.  
 	   There remains task 4 plus 3 other tasks to complete however.
        
            Review the reason for the failure by refering to one or all of the following log tables in the DTM-server:
